@@ -7,7 +7,16 @@ y goes left to right, and z top to bottom.
 
 import * as Images from "./Images.mjs";
 import { Model } from "./Model.mjs";
-import { BLOCK_FULL_HEIGHT, BLOCK_HEIGHT, BLOCK_TOP_HEIGHT, BLOCK_WIDTH, DEFAULT_BLOCK, HOTBAR_ITEM_COUNT, MODEL_SIZE, SELECTOR_ITEM_COUNT } from "./config.mjs";
+import {
+    BLOCK_FULL_HEIGHT,
+    BLOCK_HEIGHT,
+    BLOCK_TOP_HEIGHT,
+    BLOCK_WIDTH,
+    DEFAULT_BLOCK,
+    HOTBAR_ITEM_COUNT,
+    MODEL_SIZE,
+    SELECTOR_ITEM_COUNT,
+} from "./config.mjs";
 
 const selector_modes = Object.freeze({
     UNSELECTED: 0,
@@ -136,6 +145,16 @@ function canvas_hover_off() {
     }
 }
 
+function show_message(button, message, error = false) {
+    const old_text = button.innerText;
+    button.innerText = message;
+    button.style.color = error ? "red" : "";
+    setTimeout(() => {
+        button.innerText = old_text;
+        button.style.color = "";
+    }, 2000);
+}
+
 Images.load_images(Images.imageURLs).then(main);
 
 for (let i = 0; i < SELECTOR_ITEM_COUNT; i++) {
@@ -179,9 +198,40 @@ function main() {
         mousedown = false;
     });
 
-    document
-        .getElementById("copy_image_button")
-        .addEventListener("click", model.copy_model_as_image);
+    const copy_image_button = document.getElementById("copy_image_button");
+    const load_button = document.getElementById("load_button");
+    const save_button = document.getElementById("save_button");
+    copy_image_button.addEventListener("click", () => {
+        if (model.border.x1 === null) {
+            show_message(copy_image_button, "Nothing to copy", true);
+            return;
+        }
+        try {
+            model.copy_model_as_image;
+            show_message(copy_image_button, "Copied");
+        } catch {
+            show_message(copy_image_button, "Error while copying", true);
+            throw e;
+        }
+    });
+    save_button.addEventListener("click", () => {
+        try {
+            model.save();
+            show_message(save_button, "Code copied");
+        } catch {
+            show_message(save_button, "Error while saving/copying", true);
+            throw e;
+        }
+    });
+    load_button.addEventListener("click", () => {
+        try {
+            model.load(document.getElementById("load_input").value);
+            show_message(load_button, "Loaded");
+        } catch (e) {
+            show_message(load_button, "Invalid code", true);
+            throw e;
+        }
+    });
 
     const layer_number = document.getElementById("layer_number");
     document.getElementById("layer_forwards").addEventListener("click", () => {

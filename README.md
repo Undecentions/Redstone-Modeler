@@ -9,13 +9,17 @@ Yeah, I know, RSM seems to be such a common abbreviation, but no matter if it's 
 
 ## Features
 - Isometric textures. Gives a semi-3D feel, useful for flat textures such as redstone dust
-- 3D. Yes. The most wanted feature of all. And now it's in RSM.
+- 3D. Yes. The most wanted feature *of all*. And now it's in RSM.
 - One click copy. No more screenshotting endlessly
 - UI. Smaller selection panel, individual scrolling. Especially nice for mobile, where RS Editor's selection would span more than the screen width.
-- Hotbar. No endless scrolling through the selection.
+- Hotbar. No endless scrolling through the selection. Tell me if you want more/less slots in there.
 - Block states. Click on an existing block with itself to get to the next state. Instead of each texture individually appearing in the selection, there are block states. No need for 192 redstone dust in the selection to do all the states (note: not all dust textures have been added, and a change is planned to the block states selection).
 - Preview on hover. Minor detail, but really useful when working with 3D models. Note that the hover does not update when the model is scrolled on, make a PR if you can fix it.
 - Drag. No more spam clicking while moving the mouse around.
+- Saving. This feature was present in RS Editor, but it was on URL, and in my opinion this is better. Feedback welcome.
+
+## How am I supposed to use this???
+With all those features, RSM may get confusing fairly quickly. First, you must understand how the selection works. Press something in the selection (bottom), and then the hotbar (second bar), and it'll set that slot. Have that hotbar slot selected, and you can click on the model to place the block. Click again (for some blocks), and it'll go to the next texture. Press the layer buttons to toggle through them. Finally, press the copy or save button when you're finished. Enjoy the ease of making quick models while messaging, most useful when trying to describe things with words where a diagram clears everything up.
 
 ## To do
 - Add more blocks. That's the only downside for now, and I just need to do some rendering to fix that. Won't be *that* hard, will it???

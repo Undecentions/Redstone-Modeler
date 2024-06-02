@@ -1,5 +1,10 @@
 import { ModelBlock } from "./ModelBlock.mjs";
-import { BLOCK_FULL_HEIGHT, BLOCK_HEIGHT, BLOCK_TOP_HEIGHT, BLOCK_WIDTH } from "./config.mjs";
+import {
+    BLOCK_FULL_HEIGHT,
+    BLOCK_HEIGHT,
+    BLOCK_TOP_HEIGHT,
+    BLOCK_WIDTH,
+} from "./config.mjs";
 
 export class Model {
     constructor(size, canvas_context) {
@@ -38,16 +43,47 @@ export class Model {
                             .fill("")
                             .map(
                                 (_, z) =>
-                                    new ModelBlock(
-                                        this,
-                                        this.canvases[x],
-                                        x,
-                                        y,
-                                        z
-                                    )
+                                    new ModelBlock(this, this.canvases[x], {
+                                        x: x,
+                                        y: y,
+                                        z: z,
+                                    })
                             )
                     )
             );
+    }
+
+    save() {
+        const save_object = this.blocks.map((s1) =>
+            s1.map((s2) => s2.map((model_block) => model_block.texture))
+        );
+        navigator.clipboard.writeText(btoa(JSON.stringify(save_object)));
+    }
+
+    load(code) {
+        const save_object = JSON.parse(atob(code));
+        this.canvases.forEach((canvas) => {
+            canvas.getContext("2d").reset();
+        });
+        this.blocks = save_object.map((s1, x) =>
+            s1.map((s2, y) =>
+                s2.map((block_texture, z) => {
+                    const block = new ModelBlock(
+                        this,
+                        this.canvases[x],
+                        {
+                            x: x,
+                            y: y,
+                            z: z,
+                        },
+                        block_texture
+                    );
+                    block.draw();
+                    return block;
+                })
+            )
+        );
+        this.draw();
     }
 
     get({ x, y, z }) {

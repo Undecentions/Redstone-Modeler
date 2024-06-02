@@ -1,27 +1,27 @@
 import * as Images from "./Images.mjs";
-import { BLOCK_FULL_HEIGHT, BLOCK_HEIGHT, BLOCK_TOP_HEIGHT, BLOCK_WIDTH, DEFAULT_BLOCK, IMAGE_HEIGHT, IMAGE_WIDTH } from "./config.mjs";
+import {
+    BLOCK_FULL_HEIGHT,
+    BLOCK_HEIGHT,
+    BLOCK_TOP_HEIGHT,
+    BLOCK_WIDTH,
+    DEFAULT_BLOCK,
+    IMAGE_HEIGHT,
+    IMAGE_WIDTH,
+} from "./config.mjs";
 
 export class ModelBlock {
     constructor(
         parent_model,
         parent_canvas,
-        x,
-        y,
-        z,
-        texture_name = DEFAULT_BLOCK,
-        texture_y = 0,
-        texture_z = 0
+        position,
+        texture = {
+            name: DEFAULT_BLOCK,
+            y: 0,
+            z: 0,
+        }
     ) {
-        this.texture = {
-            name: texture_name,
-            y: texture_y,
-            z: texture_z,
-        };
-        this.position = {
-            x: x,
-            y: y,
-            z: z,
-        };
+        this.texture = texture;
+        this.position = position;
         this.canvas_context = parent_canvas.getContext("2d");
         this.model = parent_model;
     }
