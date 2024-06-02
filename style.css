@@ -1,0 +1,99 @@
+body,
+html {
+    height: 100%;
+}
+
+body {
+    background-color: #404040;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+#layer_control {
+    float: right;
+}
+
+#layer_number {
+    display: inline-block;
+    color: white;
+}
+
+button {
+    border: 2px solid white;
+    border-radius: 5px;
+    background-color: transparent;
+    color: white;
+}
+
+button:active {
+    background-color: #00000080;
+}
+
+#top_bar {
+    border-bottom: 5px solid #0f0f0f;
+    padding: 5px;
+}
+
+.full_width {
+    width: -webkit-fill-available;
+    width: -moz-available;
+    width: fill-available;
+}
+
+#scroll_wrapper {
+    border-top: 5px solid #0f0f0f;
+}
+
+.scroll_box {
+    width: -webkit-fill-available;
+    width: -moz-available;
+    width: fill-available;
+    margin: 0 auto;
+    border: 5px solid #0f0f0f;
+    border-top-width: 0;
+    overflow: auto hidden;
+}
+
+.scrolling {
+    width: max-content;
+    margin: 0 auto;
+}
+
+#properties {
+    display: none;
+}
+
+.item {
+    display: inline-block;
+    background-size: auto 100%;
+    box-shadow: inset 0 0 0 1px #80808080;
+    image-rendering: pixelated;
+}
+
+.selected {
+    box-shadow: inset 0 0 2px 1px black;
+}
+
+#model {
+    overflow: auto;
+}
+
+#canvas_wrapper {
+    margin: auto;
+}
+
+#canvas_wrapper_wrapper {
+    display: flex;
+    flex: 1;
+    overflow: auto;
+}
+
+canvas {
+    border: 2px solid #0f0f0f;
+    image-rendering: pixelated;
+}
+
+img {
+    image-rendering: pixelated;
+}

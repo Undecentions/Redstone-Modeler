@@ -1,0 +1,3 @@
+# ESLint's 4000 files getting out of hand, kept config stuff in case
+# someone works on it and lints the code or something
+node_modules

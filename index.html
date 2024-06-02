@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="style.css" />
+        <title>Modeler</title>
+    </head>
+    <body>
+        <div id="top_bar" class="full_width">
+            <button type="button" id="copy_image_button">Copy model to clipboard</button>
+            <div id="layer_control">
+                <div id="layer_number"></div>
+                <button type="button" id="layer_forwards">Forwards</button>
+                <button type="button" id="layer_backwards">Backwards</button>
+            </div>
+        </div>
+        <div id="canvas_wrapper_wrapper">
+            <!-- Someone please tell me how to make this better but still working for CSS -->
+            <div id="canvas_wrapper">
+                <canvas id="model"></canvas>
+            </div>
+        </div>
+        <div id="scroll_wrapper" class="full_width">
+            <div id="properties">
+                <div class="scroll_box">
+                    <div class="scrolling" id="property_1"></div>
+                </div>
+                <div class="scroll_box">
+                    <div class="scrolling" id="property_2"></div>
+            </div>
+            </div>
+            <div class="scroll_box">
+                <div class="scrolling" id="hotbar"></div>
+            </div>
+            <div class="scroll_box">
+                <div class="scrolling" id="selector"></div>
+            </div>
+        </div>
+        <script type="module" src="js/config.mjs"></script>
+        <script type="module" src="js/Images.mjs"></script>
+        <script type="module" src="js/ModelBlock.mjs"></script>
+        <script type="module" src="js/Model.mjs"></script>
+        <script type="module" src="js/main.mjs"></script>
+    </body>
+</html>
