@@ -18,6 +18,7 @@ Yeah, I know, RSM seems to be such a common abbreviation, but no matter if it's 
 - Drag. No more spam clicking while moving the mouse around.
 
 ## To do
+- Add more blocks. That's the only downside for now, and I just need to do some rendering to fix that. Won't be *that* hard, will it???
 - Render and add logo.
 - 2D block states. Select the state with a temporary panel, then put it down, instead of clicking 5 times each on some pistons. The second dimension is used for blocks like redstone dust, where clocking 192 times is impossible. Instead, there are 2 selection bars for each signal strength and shape, 12 * 16. (Note that this change would include making the selection a module, which is planned)
 
