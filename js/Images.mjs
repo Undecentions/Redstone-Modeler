@@ -18,6 +18,31 @@ export const imageURLs = [
     "slime_block.png",
 ].map((s) => `assets/${s}`);
 
+const image_abbreviations = [
+    " ",
+    "b",
+    "t",
+    "obs",
+    "tc",
+    "rb",
+    "rd",
+    "rp",
+    "p",
+    "px",
+    "ph",
+    "sp",
+    "spx",
+    "sph",
+    "sb",
+];
+
+export const image_name_encodings = Object.fromEntries(
+    imageURLs.map((v, i) => [v, image_abbreviations[i]])
+);
+export const image_name_decodings = Object.fromEntries(
+    imageURLs.map((v, i) => [image_abbreviations[i], v])
+);
+
 export const promises = [];
 export const blocks = [];
 export const widths = [];
@@ -28,9 +53,7 @@ export async function load_images() {
             new Promise((resolve) => {
                 const image = new Image();
                 image.onload = () => {
-                    widths[imageURL] = Math.floor(
-                        image.width / IMAGE_WIDTH
-                    );
+                    widths[imageURL] = Math.floor(image.width / IMAGE_WIDTH);
                     resolve();
                 };
                 image.src = imageURL;

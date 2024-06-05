@@ -1,3 +1,4 @@
+import { image_name_encodings, image_name_decodings } from "./Images.mjs";
 import { ModelBlock } from "./ModelBlock.mjs";
 import {
     BLOCK_FULL_HEIGHT,
@@ -44,9 +45,9 @@ export class Model {
                             .map(
                                 (_, z) =>
                                     new ModelBlock(this, this.canvases[x], {
-                                        x: x,
-                                        y: y,
-                                        z: z,
+                                        x,
+                                        y,
+                                        z,
                                     })
                             )
                     )
@@ -55,45 +56,72 @@ export class Model {
 
     save() {
         const save_object = this.blocks.map((s1) =>
-            s1.map((s2) => s2.map((model_block) => model_block.texture))
+            s1.map((s2) =>
+                s2.map((model_block) => {
+                    const { name, y, z } = model_block.texture;
+                    return [image_name_encodings[name], y, z];
+                })
+            )
         );
-        navigator.clipboard.writeText(btoa(JSON.stringify(save_object)));
+        LZMA.compress(JSON.stringify(save_object), 9, (result) => {
+            console.log(result);
+            navigator.clipboard.writeText(
+                btoa(result.map((v) => String.fromCharCode(v + 128)).join(""))
+            );
+        });
     }
 
     load(code) {
-        const save_object = JSON.parse(atob(code));
+        const save_object = JSON.parse(
+            LZMA.decompress(
+                atob(code)
+                    .split("")
+                    .map((v) => v.codePointAt(0) - 128)
+            )
+        );
         this.canvases.forEach((canvas) => {
             canvas.getContext("2d").reset();
         });
         this.blocks = save_object.map((s1, x) =>
             s1.map((s2, y) =>
-                s2.map((block_texture, z) => {
-                    const block = new ModelBlock(
-                        this,
-                        this.canvases[x],
-                        {
-                            x: x,
-                            y: y,
-                            z: z,
-                        },
-                        block_texture
-                    );
-                    block.draw();
-                    return block;
-                })
+                s2
+                    .toReversed()
+                    .map((block_texture, z) => {
+                        z = this.size.z - z - 1;
+                        const position = { x, y, z };
+                        const [id, y_, z_] = block_texture;
+                        const block = new ModelBlock(
+                            this,
+                            this.canvases[x],
+                            position,
+                            { name: image_name_decodings[id], y: y_, z: z_ }
+                        );
+                        block.draw();
+                        return block;
+                    })
+                    .toReversed()
             )
         );
         this.draw();
     }
 
     get({ x, y, z }) {
+        if (
+            x < 0 ||
+            x >= this.size.x ||
+            y < 0 ||
+            y >= this.size.y ||
+            z < 0 ||
+            z >= this.size.z
+        ) {
+            throw Error(
+                `Model get block out-of-bounds, tried to get [${x}][${y}][${z}]`
+            );
+        }
         const block = this.blocks[x][y][z];
         if (block !== undefined) {
             return block;
         }
-        throw Error(
-            `Model get block out-of-bounds, tried to get [${x}][${y}][${z}]`
-        );
     }
 
     set({ x, y, z }, name, hover = false) {
@@ -129,7 +157,7 @@ export class Model {
 
         const image_copying_canvas = document.createElement("canvas");
         image_copying_canvas.width =
-            (this.border.y2 - this.border.y1) * BLOCK_HEIGHT;
+            (this.border.y2 - this.border.y1) * BLOCK_WIDTH;
         image_copying_canvas.height =
             (this.border.z2 - this.border.z1) * BLOCK_HEIGHT +
             (this.border.x2 - this.border.x1) * BLOCK_TOP_HEIGHT;

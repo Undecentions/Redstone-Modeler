@@ -44,11 +44,11 @@ export class ModelBlock {
     set_block(name, hover = false) {
         let draw_hover = false;
         if (hover) {
-            if (this.texture.name == DEFAULT_BLOCK) {
+            if (this.texture.name === DEFAULT_BLOCK) {
                 this.texture.name = name;
                 draw_hover = true;
             }
-        } else if (this.texture.name == name) {
+        } else if (this.texture.name === name) {
             this.texture.y += 1;
             this.texture.y %= Images.widths[this.texture.name];
         } else {

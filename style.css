@@ -1,22 +1,20 @@
 body,
 html {
     height: 100%;
+    overscroll-behavior: none;
 }
 
 body {
+    /*
+    Because a newline between HTML elements becomes a space, 
+    and I need to get rid of it. Please blame the people
+    that made that horrible thing behave that way.
+    */
+    font-size: 0;
     background-color: #404040;
     margin: 0;
     display: flex;
     flex-direction: column;
-}
-
-#layer_control {
-    float: right;
-}
-
-#layer_number {
-    display: inline-block;
-    color: white;
 }
 
 button {
@@ -30,9 +28,13 @@ button:active {
     background-color: #00000080;
 }
 
-#top_bar {
-    border-bottom: 5px solid #0f0f0f;
-    padding: 5px;
+canvas {
+    border: 2px solid #0f0f0f;
+    image-rendering: pixelated;
+}
+
+img {
+    image-rendering: pixelated;
 }
 
 .full_width {
@@ -41,15 +43,7 @@ button:active {
     width: fill-available;
 }
 
-#scroll_wrapper {
-    border-top: 5px solid #0f0f0f;
-}
-
 .scroll_box {
-    width: -webkit-fill-available;
-    width: -moz-available;
-    width: fill-available;
-    margin: 0 auto;
     border: 5px solid #0f0f0f;
     border-top-width: 0;
     overflow: auto hidden;
@@ -60,19 +54,42 @@ button:active {
     margin: 0 auto;
 }
 
-#properties {
-    display: none;
-}
-
-.item {
+.selection_item {
     display: inline-block;
     background-size: auto 100%;
     box-shadow: inset 0 0 0 1px #80808080;
-    image-rendering: pixelated;
 }
 
 .selected {
     box-shadow: inset 0 0 2px 1px black;
+}
+
+#scroll_wrapper {
+    border-top: 5px solid #0f0f0f;
+}
+
+#top_bar {
+    display: flex;
+    border-bottom: 5px solid #0f0f0f;
+    padding: 2px;
+    white-space: nowrap;
+    overflow: auto;
+}
+
+#top_bar>* {
+    margin: 2px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+}
+
+#separator {
+    margin: auto;
+}
+
+#layer_number {
+    display: inline-block;
+    color: white;
+    margin: auto 0;
 }
 
 #model {
@@ -89,11 +106,6 @@ button:active {
     overflow: auto;
 }
 
-canvas {
-    border: 2px solid #0f0f0f;
-    image-rendering: pixelated;
-}
-
-img {
-    image-rendering: pixelated;
+#selection_properties {
+    display: none;
 }
