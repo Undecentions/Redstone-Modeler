@@ -7,7 +7,15 @@ import {
     BLOCK_WIDTH,
 } from "./config.mjs";
 
+/**
+ * The 3D RSM model.
+ */
 export class Model {
+    /**
+     *
+     * @param {{x: Number, y: Numder, z: Number}} size Size of the model
+     * @param {CanvasRenderingContext2D} canvas_context Canvas context that this model is to be drawn on
+     */
     constructor(size, canvas_context) {
         this.size = size;
         const { x: size_x, y: size_y, z: size_z } = size;
@@ -54,6 +62,9 @@ export class Model {
             );
     }
 
+    /**
+     * Generate model save code and copy to clipboard
+     */
     save() {
         const save_object = this.blocks.map((s1) =>
             s1.map((s2) =>
@@ -71,6 +82,10 @@ export class Model {
         });
     }
 
+    /**
+     * Load save code into model
+     * @param {String} code 
+     */
     load(code) {
         const save_object = JSON.parse(
             LZMA.decompress(
@@ -105,6 +120,11 @@ export class Model {
         this.draw();
     }
 
+    /**
+     * Gets a block in the model
+     * @param {{x: Number, y: Number, z: Numder}} param0 position of block
+     * @returns the block in the position
+     */
     get({ x, y, z }) {
         if (
             x < 0 ||
@@ -119,21 +139,33 @@ export class Model {
             );
         }
         const block = this.blocks[x][y][z];
-        if (block !== undefined) {
-            return block;
-        }
+        return block;
     }
 
+    /**
+     * Sets a block (texture) in the model
+     * @param {{x: Number, y: Number: z: Number}} param0 position of block
+     * @param {String} name name of the texture
+     * @param {Boolean} hover whether the mouse is down
+     */
     set({ x, y, z }, name, hover = false) {
         this.get({ x, y, z }).set_block(name, hover);
         this.draw();
     }
 
+    /**
+     * Changes to another layer
+     * @param {Number} change change in the layer number
+     */
     change_layer(change) {
         this.layer += change;
         this.draw();
     }
 
+    /**
+     * Draws the model
+     * @see {@link ModelBlock.draw}
+     */
     draw() {
         this.canvas_context.reset();
         this.canvas_context.save();
@@ -150,6 +182,9 @@ export class Model {
         this.canvas_context.restore();
     }
 
+    /**
+     * Copies the model as an image to the clipboard
+     */
     copy_model_as_image() {
         if (this.border.x1 === null) {
             return;

@@ -1,4 +1,5 @@
 import * as Images from "./Images.mjs";
+import { Model } from "./Model.mjs";
 import {
     BLOCK_FULL_HEIGHT,
     BLOCK_HEIGHT,
@@ -9,7 +10,17 @@ import {
     IMAGE_WIDTH,
 } from "./config.mjs";
 
+/**
+ * A block in a model
+ */
 export class ModelBlock {
+    /**
+     * 
+     * @param {Model} parent_model model that this block is on
+     * @param {HTMLCanvasElement} parent_canvas canvas this block is on
+     * @param {{x: Number, y: Number, z: Number}} position position of block
+     * @param {{name: String, y: Number, z: Number}} texture texture of the block
+     */
     constructor(
         parent_model,
         parent_canvas,
@@ -26,6 +37,10 @@ export class ModelBlock {
         this.model = parent_model;
     }
 
+    /**
+     * Draws the block raw
+     * @param {Boolean} front if only the front face should be drawn
+     */
     draw(front = false) {
         this.canvas_context.drawImage(
             Images.blocks[this.texture.name],
@@ -41,6 +56,12 @@ export class ModelBlock {
         );
     }
 
+    /**
+     * Sets the texture of a block, drawing the block lower,
+     * then the block, then the front of the block higher.
+     * @param {String} name name of the new texture
+     * @param {Boolean} hover if the mouse is down or not,used to determine opacity
+     */
     set_block(name, hover = false) {
         let draw_hover = false;
         if (hover) {
@@ -105,7 +126,9 @@ export class ModelBlock {
             this.model.get(temp_position).draw(true);
         }
 
-        // Real texture is blank
+        // If hovering, the real texture is blank,
+        // the temporary texture is set for drawing
+        // only and must be reset afterwards.
         if (draw_hover) {
             this.texture.name = DEFAULT_BLOCK;
         }
