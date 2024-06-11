@@ -1,5 +1,4 @@
 import * as Images from "./Images.mjs";
-import { Model } from "./Model.mjs";
 import {
     BLOCK_FULL_HEIGHT,
     BLOCK_HEIGHT,
@@ -15,7 +14,7 @@ import {
  */
 export class ModelBlock {
     /**
-     * 
+     * Creates a model block
      * @param {Model} parent_model model that this block is on
      * @param {HTMLCanvasElement} parent_canvas canvas this block is on
      * @param {{x: Number, y: Number, z: Number}} position position of block
@@ -29,7 +28,7 @@ export class ModelBlock {
             name: DEFAULT_BLOCK,
             y: 0,
             z: 0,
-        }
+        },
     ) {
         this.texture = texture;
         this.position = position;
@@ -45,14 +44,14 @@ export class ModelBlock {
         this.canvas_context.drawImage(
             Images.blocks[this.texture.name],
             IMAGE_WIDTH * this.texture.y,
-            IMAGE_HEIGHT * this.texture.z +
-                (front ? Math.floor(IMAGE_HEIGHT * (1 / 3)) : 0),
+            IMAGE_HEIGHT * this.texture.z
+            + (front ? Math.floor(IMAGE_HEIGHT * (1 / 3)) : 0),
             IMAGE_WIDTH,
             front ? Math.floor(IMAGE_HEIGHT * (2 / 3)) : IMAGE_HEIGHT,
             this.position.y * BLOCK_WIDTH,
             this.position.z * BLOCK_HEIGHT + (front ? BLOCK_TOP_HEIGHT : 0),
             BLOCK_WIDTH,
-            front ? BLOCK_HEIGHT : BLOCK_FULL_HEIGHT
+            front ? BLOCK_HEIGHT : BLOCK_FULL_HEIGHT,
         );
     }
 
@@ -69,35 +68,37 @@ export class ModelBlock {
                 this.texture.name = name;
                 draw_hover = true;
             }
-        } else if (this.texture.name === name) {
+        }
+        else if (this.texture.name === name) {
             this.texture.y += 1;
             this.texture.y %= Images.widths[this.texture.name];
-        } else {
+        }
+        else {
             this.texture.name = name;
 
             this.model.border.x1 = Math.min(
                 this.model.border.x1 ?? this.model.size.x,
-                this.position.x
+                this.position.x,
             );
             this.model.border.y1 = Math.min(
                 this.model.border.y1 ?? this.model.size.y,
-                this.position.y
+                this.position.y,
             );
             this.model.border.z1 = Math.min(
                 this.model.border.z1 ?? this.model.size.z,
-                this.position.z
+                this.position.z,
             );
             this.model.border.x2 = Math.max(
                 this.model.border.x2 ?? 0,
-                this.position.x + 1
+                this.position.x + 1,
             );
             this.model.border.y2 = Math.max(
                 this.model.border.y2 ?? 0,
-                this.position.y + 1
+                this.position.y + 1,
             );
             this.model.border.z2 = Math.max(
                 this.model.border.z2 ?? 0,
-                this.position.z + 1
+                this.position.z + 1,
             );
         }
         const temp_position = structuredClone(this.position);
@@ -105,7 +106,7 @@ export class ModelBlock {
             this.position.y * BLOCK_WIDTH,
             this.position.z * BLOCK_HEIGHT,
             BLOCK_WIDTH,
-            BLOCK_FULL_HEIGHT
+            BLOCK_FULL_HEIGHT,
         );
         // Draw bottom to top (lower z means higher)
         temp_position.z += 1;

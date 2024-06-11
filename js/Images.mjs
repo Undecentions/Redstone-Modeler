@@ -16,7 +16,7 @@ export const imageURLs = [
     "sticky_piston_extended.png",
     "sticky_piston_head.png",
     "slime_block.png",
-].map((s) => `assets/${s}`);
+].map(s => `assets/${s}`);
 
 const image_abbreviations = [
     " ",
@@ -37,10 +37,10 @@ const image_abbreviations = [
 ];
 
 export const image_name_encodings = Object.fromEntries(
-    imageURLs.map((v, i) => [v, image_abbreviations[i]])
+    imageURLs.map((v, i) => [v, image_abbreviations[i]]),
 );
 export const image_name_decodings = Object.fromEntries(
-    imageURLs.map((v, i) => [image_abbreviations[i], v])
+    imageURLs.map((v, i) => [image_abbreviations[i], v]),
 );
 
 export const promises = [];
@@ -58,7 +58,7 @@ export async function load_images() {
                 };
                 image.src = imageURL;
                 blocks[imageURL] = image;
-            })
+            }),
         );
     }
 

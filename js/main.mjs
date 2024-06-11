@@ -60,13 +60,15 @@ let mode = selector_modes.UNSELECTED;
 
 const model = new Model(MODEL_SIZE, context);
 
-function open_property_selection() {}
+function open_property_selection() {
+    // TODO
+}
 
 function select_item(selector, item) {
     selection_element[selector]?.classList.remove("selected");
     selection[selector] = item;
     selection_element[selector] = document.getElementById(
-        `${selector}_item_${item}`
+        `${selector}_item_${item}`,
     );
     selection_element[selector].classList.add("selected");
 }
@@ -84,14 +86,14 @@ function canvas_set(e, hover = false) {
 
     // Check if on canvas at all (with mouse move, it might go off canvas)
     if (
-        grid_x < 0 ||
-        grid_x > model.size.y ||
-        grid_y < 0 ||
-        grid_y > model.size.z ||
-        (e.type !== "click" &&
-            canvas_hover.x === grid_x &&
-            canvas_hover.y === grid_y &&
-            canvas_hover.hover === hover)
+        grid_x < 0
+        || grid_x > model.size.y
+        || grid_y < 0
+        || grid_y > model.size.z
+        || (e.type !== "click"
+        && canvas_hover.x === grid_x
+        && canvas_hover.y === grid_y
+        && canvas_hover.hover === hover)
     ) {
         return;
     }
@@ -117,9 +119,9 @@ function canvas_hover_off() {
         z: canvas_hover.y,
     };
     if (
-        canvas_hover.x !== null &&
-        canvas_hover.y !== null &&
-        model.get(old_position).texture.name === DEFAULT_BLOCK
+        canvas_hover.x !== null
+        && canvas_hover.y !== null
+        && model.get(old_position).texture.name === DEFAULT_BLOCK
     ) {
         model.set(old_position, DEFAULT_BLOCK);
     }
@@ -172,8 +174,8 @@ for (let i = 0; i < HOTBAR_ITEM_COUNT; i++) {
         select_item("hotbar", i);
         if (mode === selector_modes.SELECTOR) {
             // Set hotbar slot
-            selection_element.hotbar.style.backgroundImage =
-                selection_element.selector.style.backgroundImage;
+            selection_element.hotbar.style.backgroundImage
+                = selection_element.selector.style.backgroundImage;
         }
         mode = selector_modes.HOTBAR;
     });
@@ -210,7 +212,8 @@ function main() {
         try {
             model.copy_model_as_image();
             show_message(copy_image_button, "Copied");
-        } catch (e) {
+        }
+        catch (e) {
             show_message(copy_image_button, "Error", true);
             throw e;
         }
@@ -219,7 +222,8 @@ function main() {
         try {
             model.save();
             show_message(save_button, "Code copied");
-        } catch (e) {
+        }
+        catch (e) {
             show_message(save_button, "Error encountered", true);
             throw e;
         }
@@ -228,7 +232,8 @@ function main() {
         try {
             model.load(document.getElementById("load_input").value);
             show_message(load_button, "Loaded");
-        } catch (e) {
+        }
+        catch (e) {
             show_message(load_button, "Invalid code", true);
             throw e;
         }
@@ -242,7 +247,8 @@ function main() {
     layer_forwards.addEventListener("click", () => {
         if (model.layer < model.size.x - 1) {
             model.change_layer(1);
-        } else {
+        }
+        else {
             show_message(layer_forwards, "End", true);
         }
         layer_number.innerText = `Layer: ${model.layer}`;
@@ -250,7 +256,8 @@ function main() {
     layer_backwards.addEventListener("click", () => {
         if (model.layer > 0) {
             model.change_layer(-1);
-        } else {
+        }
+        else {
             show_message(layer_backwards, "End", true);
         }
         layer_number.innerText = `Layer: ${model.layer}`;

@@ -35,8 +35,8 @@ export class Model {
             .map(() => {
                 const canvas = document.createElement("canvas");
                 canvas.width = BLOCK_WIDTH * size_y;
-                canvas.height =
-                    BLOCK_HEIGHT * size_z - BLOCK_HEIGHT + BLOCK_FULL_HEIGHT;
+                canvas.height
+                    = BLOCK_HEIGHT * size_z - BLOCK_HEIGHT + BLOCK_FULL_HEIGHT;
                 return canvas;
             });
 
@@ -56,9 +56,9 @@ export class Model {
                                         x,
                                         y,
                                         z,
-                                    })
-                            )
-                    )
+                                    }),
+                            ),
+                    ),
             );
     }
 
@@ -66,33 +66,35 @@ export class Model {
      * Generate model save code and copy to clipboard
      */
     save() {
-        const save_object = this.blocks.map((s1) =>
-            s1.map((s2) =>
+        const save_object = this.blocks.map(s1 =>
+            s1.map(s2 =>
                 s2.map((model_block) => {
                     const { name, y, z } = model_block.texture;
                     return [image_name_encodings[name], y, z];
-                })
-            )
+                }),
+            ),
         );
+        // eslint-disable-next-line no-undef
         LZMA.compress(JSON.stringify(save_object), 9, (result) => {
             console.log(result);
             navigator.clipboard.writeText(
-                btoa(result.map((v) => String.fromCharCode(v + 128)).join(""))
+                btoa(result.map(v => String.fromCharCode(v + 128)).join("")),
             );
         });
     }
 
     /**
      * Load save code into model
-     * @param {String} code 
+     * @param {String} code Save code
      */
     load(code) {
         const save_object = JSON.parse(
+            // eslint-disable-next-line no-undef
             LZMA.decompress(
                 atob(code)
                     .split("")
-                    .map((v) => v.codePointAt(0) - 128)
-            )
+                    .map(v => v.codePointAt(0) - 128),
+            ),
         );
         this.canvases.forEach((canvas) => {
             canvas.getContext("2d").reset();
@@ -109,13 +111,13 @@ export class Model {
                             this,
                             this.canvases[x],
                             position,
-                            { name: image_name_decodings[id], y: y_, z: z_ }
+                            { name: image_name_decodings[id], y: y_, z: z_ },
                         );
                         block.draw();
                         return block;
                     })
-                    .toReversed()
-            )
+                    .toReversed(),
+            ),
         );
         this.draw();
     }
@@ -127,15 +129,15 @@ export class Model {
      */
     get({ x, y, z }) {
         if (
-            x < 0 ||
-            x >= this.size.x ||
-            y < 0 ||
-            y >= this.size.y ||
-            z < 0 ||
-            z >= this.size.z
+            x < 0
+            || x >= this.size.x
+            || y < 0
+            || y >= this.size.y
+            || z < 0
+            || z >= this.size.z
         ) {
             throw Error(
-                `Model get block out-of-bounds, tried to get [${x}][${y}][${z}]`
+                `Model get block out-of-bounds, tried to get [${x}][${y}][${z}]`,
             );
         }
         const block = this.blocks[x][y][z];
@@ -176,7 +178,7 @@ export class Model {
             this.canvas_context.drawImage(
                 this.canvases[layer],
                 0,
-                (layer - this.layer) * BLOCK_TOP_HEIGHT
+                (layer - this.layer) * BLOCK_TOP_HEIGHT,
             );
         }
         this.canvas_context.restore();
@@ -191,11 +193,11 @@ export class Model {
         }
 
         const image_copying_canvas = document.createElement("canvas");
-        image_copying_canvas.width =
-            (this.border.y2 - this.border.y1) * BLOCK_WIDTH;
-        image_copying_canvas.height =
-            (this.border.z2 - this.border.z1) * BLOCK_HEIGHT +
-            (this.border.x2 - this.border.x1) * BLOCK_TOP_HEIGHT;
+        image_copying_canvas.width
+            = (this.border.y2 - this.border.y1) * BLOCK_WIDTH;
+        image_copying_canvas.height
+            = (this.border.z2 - this.border.z1) * BLOCK_HEIGHT
+            + (this.border.x2 - this.border.x1) * BLOCK_TOP_HEIGHT;
 
         const context = image_copying_canvas.getContext("2d");
         context.imageSmoothingEnabled = false;
@@ -203,14 +205,14 @@ export class Model {
             context.drawImage(
                 this.canvases[layer],
                 -this.border.y1 * BLOCK_WIDTH,
-                (layer - this.border.x1) * BLOCK_TOP_HEIGHT -
-                    this.border.z1 * BLOCK_HEIGHT
+                (layer - this.border.x1) * BLOCK_TOP_HEIGHT
+                - this.border.z1 * BLOCK_HEIGHT,
             );
         }
-        image_copying_canvas.toBlob((blob) =>
+        image_copying_canvas.toBlob(blob =>
             navigator.clipboard.write([
                 new ClipboardItem({ "image/png": blob }),
-            ])
+            ]),
         );
     }
 }

@@ -9,4 +9,4 @@ export const HOTBAR_ITEM_COUNT = 16;
 
 export const DEFAULT_BLOCK = "assets/air.png";
 
-export const MODEL_SIZE = { x: 20, y: 20, z: 20 }
+export const MODEL_SIZE = { x: 20, y: 20, z: 20 };
