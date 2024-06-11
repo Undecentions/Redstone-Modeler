@@ -106,7 +106,20 @@ function canvas_set(e, hover = false) {
     canvas_hover.y = grid_y;
     canvas_hover.hover = hover;
 
-    const background_image = selection_element.hotbar.style.backgroundImage;
+    let selected_element;
+    switch (mode) {
+        case selector_modes.HOTBAR:
+            selected_element = selection_element.hotbar;
+            break;
+        case selector_modes.SELECTOR:
+            selected_element = selection_element.selector;
+            break;
+
+        default:
+            return;
+    }
+
+    const background_image = selected_element.style.backgroundImage;
     // Remove `url("` and `")` in css property
     const block = background_image.substring(5, background_image.length - 2);
     model.set({ x: model.layer, y: grid_x, z: grid_y }, block, hover);
@@ -185,7 +198,7 @@ for (let i = 0; i < HOTBAR_ITEM_COUNT; i++) {
 function main() {
     canvas.addEventListener("click", canvas_set);
     canvas.addEventListener("mousemove", (e) => {
-        if (mode === selector_modes.HOTBAR) {
+        if (mode !== selector_modes.UNSELECTED) {
             canvas_set(e, !(e.buttons & 1));
         }
     });
@@ -196,7 +209,7 @@ function main() {
             return;
         }
         e.preventDefault();
-        if (mode === selector_modes.HOTBAR) {
+        if (mode !== selector_modes.UNSELECTED) {
             canvas_set(e.changedTouches[0]);
         }
     });

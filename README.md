@@ -1,8 +1,8 @@
-# Redstone-Modeler
+# [Redstone-Modeler](https://undecentions.github.io/Redstone-Modeler)
 Modeler for redstone. Replacement for the old rseditor. Abbreviated as "RSM."
 
 ## Why not RS Editor?
-RS Editor has been *the* tool for sending redstone diagrams in chat, mostly Discord. However, it has been lacking a large number of features, which RSM attempts to fix.
+[RS Editor](https://github.com/11-90-an/rseditor) has been *the* tool for sending redstone diagrams in chat, mostly Discord. However, it has been lacking a large number of features, which RSM attempts to fix.
 
 ## Wow, RSM, hehehe
 Yeah, I know, RSM seems to be such a common abbreviation, but no matter if it's the Multimeter, the person, or whatever, we have another RSM on the list.
@@ -19,7 +19,7 @@ Yeah, I know, RSM seems to be such a common abbreviation, but no matter if it's 
 - Saving. Uses LZMA ([LZMA-JS](https://github.com/LZMA-JS/LZMA-JS)) so that the code is not hundreds of thousands of characters long. This feature was present in RS Editor, but it was on URL, and in my opinion this is better. Feedback welcome.
 
 ## How am I supposed to use this???
-With all those features, RSM may get confusing fairly quickly. First, you must understand how the selection works. Press something in the selection (bottom), and then the hotbar (second bar), and it'll set that slot. Have that hotbar slot selected, and you can click on the model to place the block. Click again (for some blocks), and it'll go to the next texture. Press the layer buttons to toggle through them. Finally, press the copy or save button when you're finished. Enjoy the ease of making quick models while messaging, most useful when trying to describe things with words where a diagram clears everything up.
+With all those features, RSM may get confusing fairly quickly. First, you have the extra-fancy-horizontal-scrolling selection. Press something in the selection (bottom), and then the hotbar (second bar from bottom), and it'll set that slot. Have that hotbar slot selected (selector slot also works&mdash;more frequent stuff go in the hotbar though), and you can click on the model to place the block. Click again (for some blocks that support it), and it'll go to the next texture. Press the layer buttons to toggle through them. Finally, press the copy or save button when you're finished. So useful when trying to describe things with words&hellip; when a diagram clears everything up instantly.
 
 ## To do
 - Add more blocks. That's the only downside for now, and I just need to do some rendering to fix that. Won't be *that* hard, will it???
