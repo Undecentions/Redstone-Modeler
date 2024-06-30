@@ -28,7 +28,7 @@ With all those features, RSM may get confusing fairly quickly. First, you have t
 - 2D block states. Select the state with a temporary panel, then put it down, instead of clicking 5 times each on some pistons. The second dimension is used for blocks like redstone dust, where clocking 192 times is impossible. Instead, there are 2 selection bars for each signal strength and shape, 12 * 16. (Note that this change would include making the selection a module, which is planned)
 
 ## Any bugs or suggestions?
-Either go on the project Discord (to be finished, better for more minor issues, open an issue if it's a bug) or open an issue on this github page. Code readability and structure suggestions are welcome, but don't do minor style stuff such as double vs single quotes.
+Either go on the [projest Discord](https://discord.gg/2Qndd5v6JF) (for minor problems) or open an issue on this github page. Code readability and structure suggestions are welcome, but don't do minor style stuff such as double vs single quotes.
 
 ## RS Editor
 Thanks to RS Editor for the idea of this project. Some code was consulted, but I decided that it was not very usable, and p5.js is unneccesary. The old project can be found at the [RS Editor github page](https://github.com/11-90-an/rseditor).
