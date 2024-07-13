@@ -7,23 +7,15 @@ y goes left to right, and z top to bottom.
 
 import * as Images from "./Images.mjs";
 import { Model } from "./Model.mjs";
+import { Selection } from "./Selection.mjs";
 import {
     BLOCK_FULL_HEIGHT,
     BLOCK_HEIGHT,
     BLOCK_TOP_HEIGHT,
     BLOCK_WIDTH,
     DEFAULT_BLOCK,
-    HOTBAR_ITEM_COUNT,
     MODEL_SIZE,
-    SELECTOR_ITEM_COUNT,
 } from "./config.mjs";
-
-// Funny js enum
-const selector_modes = Object.freeze({
-    UNSELECTED: 0,
-    HOTBAR: 1,
-    SELECTOR: 2,
-});
 
 const canvas_hover = {
     x: null,
@@ -47,30 +39,11 @@ const hotbar = document.getElementById("hotbar");
 selector.style.height = `${BLOCK_FULL_HEIGHT / 2}px`;
 hotbar.style.height = `${BLOCK_FULL_HEIGHT / 2}px`;
 
-const selection = {
-    hotbar: 0,
-    selector: 0,
-};
-// These `null`s cause a lot of `?.`s
-const selection_element = {
-    hotbar: null,
-    selector: null,
-};
-let mode = selector_modes.UNSELECTED;
-
 const model = new Model(MODEL_SIZE, context);
+const selection = new Selection();
 
 function open_property_selection() {
     // TODO
-}
-
-function select_item(selector, item) {
-    selection_element[selector]?.classList.remove("selected");
-    selection[selector] = item;
-    selection_element[selector] = document.getElementById(
-        `${selector}_item_${item}`,
-    );
-    selection_element[selector].classList.add("selected");
 }
 
 function canvas_set(e, hover = false) {
@@ -90,10 +63,12 @@ function canvas_set(e, hover = false) {
         || grid_x > model.size.y
         || grid_y < 0
         || grid_y > model.size.z
-        || (e.type !== "click"
-        && canvas_hover.x === grid_x
-        && canvas_hover.y === grid_y
-        && canvas_hover.hover === hover)
+        || (
+            e.type !== "click"
+            && canvas_hover.x === grid_x
+            && canvas_hover.y === grid_y
+            && canvas_hover.hover === hover
+        )
     ) {
         return;
     }
@@ -107,12 +82,12 @@ function canvas_set(e, hover = false) {
     canvas_hover.hover = hover;
 
     let selected_element;
-    switch (mode) {
-        case selector_modes.HOTBAR:
-            selected_element = selection_element.hotbar;
+    switch (selection.mode) {
+        case Selection.selector_modes.HOTBAR:
+            selected_element = selection.selection_element.hotbar;
             break;
-        case selector_modes.SELECTOR:
-            selected_element = selection_element.selector;
+        case Selection.selector_modes.SELECTOR:
+            selected_element = selection.selection_element.selector;
             break;
 
         default:
@@ -158,47 +133,12 @@ function show_message(button, message, error = false) {
     };
 }
 
-Images.load_images(Images.imageURLs).then(main);
-
-for (let i = 0; i < SELECTOR_ITEM_COUNT; i++) {
-    const selector_item = document.createElement("div");
-    selector_item.id = `selector_item_${i}`;
-    selector_item.classList.add("selection_item");
-    selector_item.style.backgroundImage = `url("${Images.imageURLs[i]}")`;
-    selector_item.style.width = `${BLOCK_WIDTH / 2}px`;
-    selector_item.style.height = `${BLOCK_FULL_HEIGHT / 2}px`;
-    selector_item.addEventListener("click", () => {
-        selection_element.hotbar?.classList.remove("selected");
-        select_item("selector", i);
-        mode = selector_modes.SELECTOR;
-    });
-    selector.appendChild(selector_item);
-}
-
-for (let i = 0; i < HOTBAR_ITEM_COUNT; i++) {
-    const hotbar_item = document.createElement("div");
-    hotbar_item.id = `hotbar_item_${i}`;
-    hotbar_item.classList.add("selection_item");
-    hotbar_item.style.backgroundImage = `url("${DEFAULT_BLOCK}")`;
-    hotbar_item.style.width = `${BLOCK_WIDTH / 2}px`;
-    hotbar_item.style.height = `${BLOCK_FULL_HEIGHT / 2}px`;
-    hotbar_item.addEventListener("click", () => {
-        selection_element.selector?.classList.remove("selected");
-        select_item("hotbar", i);
-        if (mode === selector_modes.SELECTOR) {
-            // Set hotbar slot
-            selection_element.hotbar.style.backgroundImage
-                = selection_element.selector.style.backgroundImage;
-        }
-        mode = selector_modes.HOTBAR;
-    });
-    hotbar.appendChild(hotbar_item);
-}
-
 function main() {
+    selection.initialize();
+
     canvas.addEventListener("click", canvas_set);
     canvas.addEventListener("mousemove", (e) => {
-        if (mode !== selector_modes.UNSELECTED) {
+        if (selection.mode !== Selection.selector_modes.UNSELECTED) {
             canvas_set(e, !(e.buttons & 1));
         }
     });
@@ -209,7 +149,7 @@ function main() {
             return;
         }
         e.preventDefault();
-        if (mode !== selector_modes.UNSELECTED) {
+        if (selection.mode !== Selection.selector_modes.UNSELECTED) {
             canvas_set(e.changedTouches[0]);
         }
     });
@@ -277,3 +217,7 @@ function main() {
     });
     layer_number.innerText = `Layer: ${model.layer}`;
 }
+
+await Images.load_images(Images.imageURLs);
+
+main();
