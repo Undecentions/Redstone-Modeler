@@ -42,10 +42,6 @@ hotbar.style.height = `${BLOCK_FULL_HEIGHT / 2}px`;
 const model = new Model(MODEL_SIZE, context);
 const selection = new Selection();
 
-function open_property_selection() {
-    // TODO
-}
-
 function canvas_set(e, hover = false) {
     // For convenience, x and y in this are the y and z in the 3D
     // Get canvas click coordinates

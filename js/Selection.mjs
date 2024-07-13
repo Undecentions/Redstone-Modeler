@@ -67,6 +67,10 @@ export class Selection {
         }
     }
 
+    open_property_selection() {
+
+    }
+
     select_item(selector, item) {
         this.selection_element[selector]?.classList.remove("selected");
         this.selection[selector] = item;
