@@ -146,12 +146,12 @@ export class Model {
 
     /**
      * Sets a block (texture) in the model
-     * @param {{x: Number, y: Number: z: Number}} param0 position of block
-     * @param {String} name name of the texture
+     * @param {{x: Number, y: Number, z: Number}} position position of block
+     * @param {{name: String, y: Number, z: Number}} texture name of the texture
      * @param {Boolean} hover whether the mouse is down
      */
-    set({ x, y, z }, name, hover = false) {
-        this.get({ x, y, z }).set_block(name, hover);
+    set(position, texture, hover = false) {
+        this.get(position).set_block(texture, hover);
         this.draw();
     }
 
