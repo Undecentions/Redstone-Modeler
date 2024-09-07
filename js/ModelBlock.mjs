@@ -58,10 +58,12 @@ export class ModelBlock {
     /**
      * Sets the texture of a block, drawing the block lower,
      * then the block, then the front of the block higher.
-     * @param {String} name name of the new texture
-     * @param {Boolean} hover if the mouse is down or not,used to determine opacity
+     * @param {{name: String, y: Number, z: Number}} texture new texture
+     * @param {Boolean} hover if the mouse is down or not, used to determine opacity
      */
-    set_block(name, hover = false) {
+    set_block({ name, y, z }, hover = false) {
+        this.texture.y = y;
+        this.texture.z = z;
         let draw_hover = false;
         if (hover) {
             if (this.texture.name === DEFAULT_BLOCK) {
@@ -69,38 +71,43 @@ export class ModelBlock {
                 draw_hover = true;
             }
         }
-        else if (this.texture.name === name) {
-            this.texture.y += 1;
-            this.texture.y %= Images.widths[this.texture.name];
-        }
         else {
-            this.texture.name = name;
+            // TODO: see if there's a better way to compare objects
+            // UNFINISHED: need to fix this
+            // if (this.texture.name === name && this.texture.y === y && this.texture.z === z) {
+            //     this.texture.y += 1;
+            //     this.texture.y %= Images.widths[this.texture.name];
+            // }
+            if (this.texture.name !== name) {
+                this.texture.name = name;
 
-            this.model.border.x1 = Math.min(
-                this.model.border.x1 ?? this.model.size.x,
-                this.position.x,
-            );
-            this.model.border.y1 = Math.min(
-                this.model.border.y1 ?? this.model.size.y,
-                this.position.y,
-            );
-            this.model.border.z1 = Math.min(
-                this.model.border.z1 ?? this.model.size.z,
-                this.position.z,
-            );
-            this.model.border.x2 = Math.max(
-                this.model.border.x2 ?? 0,
-                this.position.x + 1,
-            );
-            this.model.border.y2 = Math.max(
-                this.model.border.y2 ?? 0,
-                this.position.y + 1,
-            );
-            this.model.border.z2 = Math.max(
-                this.model.border.z2 ?? 0,
-                this.position.z + 1,
-            );
-        }
+                this.model.border.x1 = Math.min(
+                    this.model.border.x1 ?? this.model.size.x,
+                    this.position.x,
+                );
+                this.model.border.y1 = Math.min(
+                    this.model.border.y1 ?? this.model.size.y,
+                    this.position.y,
+                );
+                this.model.border.z1 = Math.min(
+                    this.model.border.z1 ?? this.model.size.z,
+                    this.position.z,
+                );
+                this.model.border.x2 = Math.max(
+                    this.model.border.x2 ?? 0,
+                    this.position.x + 1,
+                );
+                this.model.border.y2 = Math.max(
+                    this.model.border.y2 ?? 0,
+                    this.position.y + 1,
+                );
+                this.model.border.z2 = Math.max(
+                    this.model.border.z2 ?? 0,
+                    this.position.z + 1,
+                );
+            };
+        };
+
         const temp_position = structuredClone(this.position);
         this.canvas_context.clearRect(
             this.position.y * BLOCK_WIDTH,

@@ -1,4 +1,4 @@
-import { IMAGE_WIDTH } from "./config.mjs";
+import { IMAGE_HEIGHT, IMAGE_WIDTH } from "./config.mjs";
 
 export const imageURLs = [
     "air.png",
@@ -48,6 +48,7 @@ export const image_name_decodings = Object.fromEntries(
 export const promises = [];
 export const blocks = [];
 export const widths = [];
+export const heights = [];
 
 export async function load_images() {
     for (let imageURL of imageURLs) {
@@ -55,6 +56,7 @@ export async function load_images() {
             new Promise((resolve) => {
                 const image = new Image();
                 image.onload = () => {
+                    heights[imageURL] = Math.floor(image.height / IMAGE_HEIGHT);
                     widths[imageURL] = Math.floor(image.width / IMAGE_WIDTH);
                     resolve();
                 };

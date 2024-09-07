@@ -23,6 +23,8 @@ const canvas_hover = {
     hover: false,
 };
 
+let canvas_moved = true;
+
 /**
  * @type {HTMLCanvasElement}
  */
@@ -54,13 +56,14 @@ function canvas_set(e, hover = false) {
     const grid_y = Math.floor((y - BLOCK_TOP_HEIGHT) / BLOCK_HEIGHT);
 
     // Check if on canvas at all (with mouse move, it might go off canvas)
+    // and if it's on a different block than last time
     if (
         grid_x < 0
         || grid_x > model.size.y
         || grid_y < 0
         || grid_y > model.size.z
         || (
-            e.type !== "click"
+            e.type !== "mousedown"
             && canvas_hover.x === grid_x
             && canvas_hover.y === grid_y
             && canvas_hover.hover === hover
@@ -71,6 +74,10 @@ function canvas_set(e, hover = false) {
 
     if (hover) {
         canvas_hover_off();
+    }
+
+    if (canvas_hover.x !== grid_x || canvas_hover.y !== grid_y) {
+        canvas_moved = true;
     }
 
     canvas_hover.x = grid_x;
@@ -92,8 +99,24 @@ function canvas_set(e, hover = false) {
 
     const background_image = selected_element.style.backgroundImage;
     // Remove `url("` and `")` in css property
-    const block = background_image.substring(5, background_image.length - 2);
-    model.set({ x: model.layer, y: grid_x, z: grid_y }, block, hover);
+    const block_name = background_image.substring(5, background_image.length - 2);
+
+    const background_position_x = selected_element.style.backgroundPositionX || "0px";
+    const background_position_y = selected_element.style.backgroundPositionY || "0px";
+    let texture_x = -parseInt(background_position_x.substring(0, background_position_x.length - 2)) / 36;
+    const texture_y = -parseInt(background_position_y.substring(0, background_position_y.length - 2)) / 48;
+
+    const block = model.get({ x: model.layer, y: grid_x, z: grid_y });
+    if (!canvas_moved) {
+        texture_x = (block.texture.y + 1) % Images.widths[block.texture.name];
+    }
+    else if (!hover) {
+        canvas_moved = false;
+    }
+
+    if (!hover || block.texture.name === DEFAULT_BLOCK) {
+        model.set({ x: model.layer, y: grid_x, z: grid_y }, { name: block_name, y: texture_x, z: texture_y }, hover);
+    }
 }
 
 function canvas_hover_off() {
@@ -107,7 +130,7 @@ function canvas_hover_off() {
         && canvas_hover.y !== null
         && model.get(old_position).texture.name === DEFAULT_BLOCK
     ) {
-        model.set(old_position, DEFAULT_BLOCK);
+        model.set(old_position, { name: DEFAULT_BLOCK, y: 0, z: 0 });
     }
 }
 
@@ -132,7 +155,7 @@ function show_message(button, message, error = false) {
 function main() {
     selection.initialize();
 
-    canvas.addEventListener("click", canvas_set);
+    canvas.addEventListener("mousedown", canvas_set);
     canvas.addEventListener("mousemove", (e) => {
         if (selection.mode !== Selection.selector_modes.UNSELECTED) {
             canvas_set(e, !(e.buttons & 1));
