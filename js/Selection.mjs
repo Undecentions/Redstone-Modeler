@@ -53,6 +53,12 @@ export class Selection {
             hotbar_item.style.height = `${BLOCK_FULL_HEIGHT / 2}px`;
             hotbar_item.addEventListener("click", () => {
                 this.selection_element.selector?.classList.remove("selected");
+                if (this.mode === Selection.selector_modes.HOTBAR
+                    && this.selection_element["hotbar"].id === `hotbar_item_${i}`
+                    && document.getElementById("selection_properties").style.display === "block") {
+                    document.getElementById("selection_properties").style.display = "none";
+                    return;
+                }
                 this.select_item("hotbar", i);
                 if (this.mode === Selection.selector_modes.SELECTOR) {
                     // Set hotbar slot
