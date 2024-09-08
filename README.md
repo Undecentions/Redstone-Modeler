@@ -29,7 +29,7 @@ With all those features, RSM may get confusing fairly quickly. First, you have t
 - Keybinds.
 
 ## Any bugs or suggestions?
-Either go on the [projest Discord](https://discord.gg/2Qndd5v6JF) (for minor problems) or open an issue on this github page. Code readability and structure suggestions are welcome, but don't do minor style stuff such as double vs single quotes.
+Either go on the [project Discord](https://discord.gg/2Qndd5v6JF) (for minor problems) or open an issue on this github page. Code readability and structure suggestions are welcome, but don't do minor style stuff such as double vs single quotes.
 
 ## RS Editor
 Thanks to RS Editor for the idea of this project. Some code was consulted, but I decided that it was not very usable, and p5.js is unneccesary. The old project can be found at the [RS Editor github page](https://github.com/11-90-an/rseditor).
