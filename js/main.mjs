@@ -237,6 +237,18 @@ function main() {
     layer_number.innerText = `Layer: ${model.layer}`;
 }
 
+document.getElementById("logo").src = `logo${window.innerWidth > window.innerHeight ? "_wide" : "_tall"}.gif?v=${new Date().valueOf()}`;
+
+const splash = new Promise(resolve => setTimeout(resolve, 4000));
 await Images.load_images(Images.imageURLs);
 
-main();
+const load_main = new Promise((resolve) => {
+    main();
+    resolve();
+});
+
+await splash;
+await load_main;
+
+document.getElementById("splash").style.pointerEvents = "none";
+document.getElementById("splash").style.opacity = "0";
