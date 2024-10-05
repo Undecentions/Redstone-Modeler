@@ -30,57 +30,40 @@ export class Model {
 
         this.layer = Math.floor(size_x / 2);
         this.canvas_context = canvas_context;
-        this.canvases = Array(size_x)
-            .fill("")
-            .map(() => {
-                const canvas = document.createElement("canvas");
-                canvas.width = BLOCK_WIDTH * size_y;
-                canvas.height
-                    = BLOCK_HEIGHT * size_z - BLOCK_HEIGHT + BLOCK_FULL_HEIGHT;
-                return canvas;
-            });
+        this.canvases = Array(size_x).fill("").map(() => {
+            const canvas = document.createElement("canvas");
+            canvas.width = BLOCK_WIDTH * size_y;
+            canvas.height = BLOCK_HEIGHT * size_z - BLOCK_HEIGHT + BLOCK_FULL_HEIGHT;
+            return canvas;
+        });
 
         // Honestly js should have list comprehension
         // Type ModelBlock[][][]
-        this.blocks = Array(size_x)
-            .fill("")
-            .map((_, x) =>
-                Array(size_y)
-                    .fill("")
-                    .map((_, y) =>
-                        Array(size_z)
-                            .fill("")
-                            .map(
-                                (_, z) =>
-                                    new ModelBlock(this, this.canvases[x], {
-                                        x,
-                                        y,
-                                        z,
-                                    }),
-                            ),
-                    ),
-            );
+        this.blocks = Array(size_x).fill("").map((_, x) =>
+            Array(size_y).fill("").map((_, y) =>
+                Array(size_z).fill("").map((_, z) =>
+                    new ModelBlock(this, this.canvases[x], { x, y, z }),
+                ),
+            ),
+        );
     }
 
     /**
      * Generate model save code and copy to clipboard
      */
     save() {
-        const save_object = this.blocks.map(s1 =>
-            s1.map(s2 =>
-                s2.map((model_block) => {
-                    const { name, y, z } = model_block.texture;
-                    return [image_name_encodings[name], y, z];
-                }),
-            ),
-        );
+        const save_object = this.blocks.map(s1 => s1.map(s2 => s2.map((model_block) => {
+            const { name, y, z } = model_block.texture;
+            return [image_name_encodings[name], y, z];
+        })));
         // eslint-disable-next-line no-undef
-        LZMA.compress(JSON.stringify(save_object), 9, (result) => {
-            console.log(result);
-            navigator.clipboard.writeText(
-                btoa(result.map(v => String.fromCharCode(v + 128)).join("")),
-            );
-        });
+        LZMA.compress(
+            JSON.stringify(save_object),
+            9,
+            result => navigator.clipboard.writeText(btoa(
+                result.map(v => String.fromCharCode(v + 128)).join(""),
+            )),
+        );
     }
 
     /**
@@ -91,32 +74,24 @@ export class Model {
         const save_object = JSON.parse(
             // eslint-disable-next-line no-undef
             LZMA.decompress(
-                atob(code)
-                    .split("")
-                    .map(v => v.codePointAt(0) - 128),
+                atob(code).split("").map(v => v.codePointAt(0) - 128),
             ),
         );
-        this.canvases.forEach((canvas) => {
-            canvas.getContext("2d").reset();
-        });
+        this.canvases.forEach(canvas => canvas.getContext("2d").reset());
         this.blocks = save_object.map((s1, x) =>
             s1.map((s2, y) =>
-                s2
-                    .toReversed()
-                    .map((block_texture, z) => {
-                        z = this.size.z - z - 1;
-                        const position = { x, y, z };
-                        const [id, y_, z_] = block_texture;
-                        const block = new ModelBlock(
-                            this,
-                            this.canvases[x],
-                            position,
-                            { name: image_name_decodings[id], y: y_, z: z_ },
-                        );
-                        block.draw();
-                        return block;
-                    })
-                    .toReversed(),
+                s2.toReversed().map((block_texture, z) => {
+                    z = this.size.z - z - 1;
+                    const [id, y_, z_] = block_texture;
+                    const block = new ModelBlock(
+                        this,
+                        this.canvases[x],
+                        { x, y, z },
+                        { name: image_name_decodings[id], y: y_, z: z_ },
+                    );
+                    block.draw();
+                    return block;
+                }).toReversed(),
             ),
         );
         this.draw();
@@ -129,19 +104,13 @@ export class Model {
      */
     get({ x, y, z }) {
         if (
-            x < 0
-            || x >= this.size.x
-            || y < 0
-            || y >= this.size.y
-            || z < 0
-            || z >= this.size.z
+            x < 0 || x >= this.size.x
+            || y < 0 || y >= this.size.y
+            || z < 0 || z >= this.size.z
         ) {
-            throw Error(
-                `Model get block out-of-bounds, tried to get [${x}][${y}][${z}]`,
-            );
+            throw Error(`Model get block out-of-bounds, tried to get [${x}][${y}][${z}]`);
         }
-        const block = this.blocks[x][y][z];
-        return block;
+        return this.blocks[x][y][z];
     }
 
     /**
@@ -188,13 +157,10 @@ export class Model {
      * Copies the model as an image to the clipboard
      */
     copy_model_as_image() {
-        if (this.border.x1 === null) {
-            return;
-        }
+        if (this.border.x1 === null) return;
 
         const image_copying_canvas = document.createElement("canvas");
-        image_copying_canvas.width
-            = (this.border.y2 - this.border.y1) * BLOCK_WIDTH;
+        image_copying_canvas.width = (this.border.y2 - this.border.y1) * BLOCK_WIDTH;
         image_copying_canvas.height
             = (this.border.z2 - this.border.z1) * BLOCK_HEIGHT
             + (this.border.x2 - this.border.x1) * BLOCK_TOP_HEIGHT;
@@ -209,10 +175,9 @@ export class Model {
                 - this.border.z1 * BLOCK_HEIGHT,
             );
         }
+
         image_copying_canvas.toBlob(blob =>
-            navigator.clipboard.write([
-                new ClipboardItem({ "image/png": blob }),
-            ]),
+            navigator.clipboard.write([new ClipboardItem({ "image/png": blob })]),
         );
     }
 }
