@@ -1,4 +1,7 @@
 # [Redstone-Modeler](https://undecentions.github.io/Redstone-Modeler)
+
+![gif](logo_repeat.gif)
+
 Modeler for redstone. Replacement for the old RS Editor. AKA "RSM."
 
 ## Why not RS Editor?
@@ -8,7 +11,7 @@ Modeler for redstone. Replacement for the old RS Editor. AKA "RSM."
 RSM seems to be such a common abbreviation, but no matter if it's the mod, the person, math, or whatever, we have another one.
 
 ## Features
-- 3D. Yes. It's here.
+- 3D. Yes. It's here. No, not perspective 3D. just 3D.
 - Isometric textures. Gives a semi-3D feel, useful for flat textures such as redstone dust and 3D-ness
 - One click copy. No more screenshotting, just press the button.
 - UI. Smaller selection, individual scrolling. Nice for mobile, where RS Editor's selection would span more than the screen width, and scrolling back and forth is required.
@@ -31,7 +34,7 @@ Through the 2D selection panel, select a block state (hide the panel by pressing
 Finally, press the copy or save button when you're finished. 
 
 ## To do
-- Add more blocks. That's the only downside for now, and I just need to do some rendering to fix that. Won't be *that* hard, will it???
+- Add more blocks (currently working on). That's the only downside for now, and I just need to do some rendering to fix that. Won't be *that* hard, will it???
 - Auto model resizing. Get to the edge and it'll become bigger.
 - Keybinds.
 
