@@ -237,8 +237,8 @@ function main() {
     layer_number.innerText = `Layer: ${model.layer}`;
 }
 
-document.getElementById("logo").src = `logo${window.innerWidth > window.innerHeight ? "_wide" : "_tall"}.gif?v=${new Date().valueOf()}`;
-
+document.getElementById("logo_source").src = `logo${window.innerWidth > window.innerHeight ? "_wide" : "_tall"}.mp4`;
+document.getElementById("logo").load();
 const splash = new Promise(resolve => setTimeout(resolve, 4000));
 await Images.load_images(Images.imageURLs);
 
