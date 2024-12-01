@@ -38,27 +38,61 @@ export class ModelBlock {
 
     /**
      * Draws the block raw
-     * @param {Boolean} front if only the front face should be drawn
+     * @param {Boolean} top if the top should be drawn
+     * @param {Boolean} middle if the middle (front face excluding bottom face) should be drawn
+     * @param {Boolean} bottom if the bottom (front face in the same position as the bottom) should be drawn
      */
-    draw(front = false) {
-        this.canvas_context.drawImage(
-            Images.blocks[this.texture.name],
+    draw(top = true, middle = true, bottom = true) {
+        if (top) {
+            this.canvas_context.drawImage(
+                Images.blocks[this.texture.name],
 
-            IMAGE_WIDTH * this.texture.y,
-            IMAGE_HEIGHT * this.texture.z + (front ? Math.floor(IMAGE_HEIGHT / 3) : 0),
-            IMAGE_WIDTH,
-            front ? Math.floor(IMAGE_HEIGHT * (2 / 3)) : IMAGE_HEIGHT,
+                IMAGE_WIDTH * this.texture.y,
+                IMAGE_HEIGHT * this.texture.z,
+                IMAGE_WIDTH,
+                Math.floor(IMAGE_HEIGHT / 3),
 
-            this.position.y * BLOCK_WIDTH,
-            this.position.z * BLOCK_HEIGHT + (front ? BLOCK_TOP_HEIGHT : 0),
-            BLOCK_WIDTH,
-            front ? BLOCK_HEIGHT : BLOCK_FULL_HEIGHT,
-        );
+                this.position.y * BLOCK_WIDTH,
+                this.position.z * BLOCK_HEIGHT,
+                BLOCK_WIDTH,
+                BLOCK_TOP_HEIGHT,
+            );
+        }
+        if (middle) {
+            this.canvas_context.drawImage(
+                Images.blocks[this.texture.name],
+
+                IMAGE_WIDTH * this.texture.y,
+                IMAGE_HEIGHT * this.texture.z + Math.floor(IMAGE_HEIGHT / 3),
+                IMAGE_WIDTH,
+                Math.floor(IMAGE_HEIGHT / 3),
+
+                this.position.y * BLOCK_WIDTH,
+                this.position.z * BLOCK_HEIGHT + BLOCK_TOP_HEIGHT,
+                BLOCK_WIDTH,
+                BLOCK_HEIGHT - BLOCK_TOP_HEIGHT,
+            );
+        }
+        if (bottom) {
+            this.canvas_context.drawImage(
+                Images.blocks[this.texture.name],
+
+                IMAGE_WIDTH * this.texture.y,
+                IMAGE_HEIGHT * this.texture.z + Math.floor(IMAGE_HEIGHT * 2 / 3),
+                IMAGE_WIDTH,
+                Math.floor(IMAGE_HEIGHT / 3),
+
+                this.position.y * BLOCK_WIDTH,
+                this.position.z * BLOCK_HEIGHT + BLOCK_FULL_HEIGHT - BLOCK_TOP_HEIGHT,
+                BLOCK_WIDTH,
+                BLOCK_TOP_HEIGHT,
+            );
+        }
     }
 
     /**
-     * Sets the texture of a block, drawing the block lower,
-     * then the block, then the front of the block higher.
+     * Sets the texture of a block, drawing the  top of the block lower,
+     * then the block, then the bottom of the block higher.
      * @param {{name: String, y: Number, z: Number}} texture new texture
      * @param {Boolean} hover if the mouse is down or not, used to determine opacity
      */
@@ -108,7 +142,7 @@ export class ModelBlock {
         );
         // Draw bottom to top (lower z means higher)
         temp_position.z += 1;
-        if (temp_position.z < this.model.size.z) this.model.get(temp_position).draw();
+        if (temp_position.z < this.model.size.z) this.model.get(temp_position).draw(true, false, false);
 
         temp_position.z -= 1;
         this.canvas_context.save();
@@ -117,7 +151,7 @@ export class ModelBlock {
         this.canvas_context.restore();
 
         temp_position.z -= 1;
-        if (temp_position.z >= 0) this.model.get(temp_position).draw(true);
+        if (temp_position.z >= 0) this.model.get(temp_position).draw(false, false, true);
 
         // If hovering, the real texture is blank,
         // the temporary texture is set for drawing
