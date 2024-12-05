@@ -3,6 +3,9 @@ from collections import defaultdict
 
 
 class StateParser(Parser):
+    """
+    Parser for block state files.
+    """
     states: dict[str, list]
 
     def parse(self) -> None:
@@ -128,6 +131,20 @@ class StateParser(Parser):
         self.states = sorted_states
 
     def get_state(self, state: dict[str, str]) -> list[dict]:
+        """
+        Get the state from a dictionary of states.
+        
+        Parameters
+        ----------
+        states
+            A dictionary of block states.
+        
+        Returns
+        -------
+        list
+            A list of JSON entries (dictionaries) from the states file
+            matching the states dictionary.
+        """
         key = next(iter(self.properties.keys()))
         data = self.properties[key]
 
