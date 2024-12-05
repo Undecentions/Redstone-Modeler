@@ -1,0 +1,25 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "down": "minecraft:block/dark_oak_planks",
+    "east": "minecraft:block/cartography_table_top",
+    "north": "minecraft:block/cartography_table_side3",
+    "particle": "minecraft:block/cartography_table_side3",
+    "south": "minecraft:block/cartography_table_side1",
+    "up": "minecraft:block/cartography_table_top",
+    "west": "minecraft:block/cartography_table_side2"
+  },
+  "elements": [
+      {   "from": [ 0, 0, 0 ],
+          "to": [ 16, 16, 16 ],
+          "faces": {
+              "down":  { "texture": "#down", "cullface": "down" },
+              "up":    { "texture": "#up", "cullface": "up" },
+              "north": { "texture": "#north", "cullface": "north" },
+              "south": { "texture": "#south", "cullface": "south" },
+              "west":  { "texture": "#west", "cullface": "west", "rotation": 270 },
+              "east":  { "texture": "#east", "cullface": "east", "rotation": 90 }
+          }
+      }
+  ]
+}

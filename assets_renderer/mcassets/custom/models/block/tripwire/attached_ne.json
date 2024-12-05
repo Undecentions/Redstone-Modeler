@@ -1,0 +1,41 @@
+{
+    "ambientocclusion": false,
+    "textures": {
+        "particle": "block/tripwire/particle",
+        "texture": "block/tripwire/unpowered"
+    },
+    "elements": [
+        {   "from": [ 7.749, 1.5, 0 ],
+            "to": [ 8.251, 1.5, 4 ],
+            "shade": false,
+            "faces": {
+                "down":  { "uv": [ 16, 2, 0, 4 ], "texture": "#texture", "rotation": 90 },
+                "up":    { "uv": [ 0, 2, 16, 4 ], "texture": "#texture", "rotation": 90 }
+            }
+        },
+        {   "from": [ 7.749, 1.5, 4 ],
+            "to": [ 8.251, 1.5, 8 ],
+            "shade": false,
+            "faces": {
+                "down":  { "uv": [ 16, 2, 0, 4 ], "texture": "#texture", "rotation": 90 },
+                "up":    { "uv": [ 0, 2, 16, 4 ], "texture": "#texture", "rotation": 90 }
+            }
+        },
+        {   "from": [ 8, 1.5, 7.749 ],
+            "to": [ 12, 1.5, 8.251 ],
+            "shade": false,
+            "faces": {
+                "down":  { "uv": [ 0, 4, 16, 2 ], "texture": "#texture" },
+                "up":    { "uv": [ 0, 2, 16, 4 ], "texture": "#texture" }
+            }
+        },
+        {   "from": [ 12, 1.5, 7.749 ],
+            "to": [ 16, 1.5, 8.251 ],
+            "shade": false,
+            "faces": {
+                "down":  { "uv": [ 0, 4, 16, 2 ], "texture": "#texture" },
+                "up":    { "uv": [ 0, 2, 16, 4 ], "texture": "#texture" }
+            }
+        }
+    ]
+}

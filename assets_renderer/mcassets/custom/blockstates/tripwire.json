@@ -1,0 +1,236 @@
+{
+  "variants": {
+    "attached=false,east=false,north=false,powered=false,south=false,west=false": {
+      "model": "custom:block/tripwire/ns"
+    },
+    "attached=false,east=false,north=false,powered=false,south=false,west=true": {
+      "model": "custom:block/tripwire/n",
+      "y": 270
+    },
+    "attached=false,east=false,north=false,powered=false,south=true,west=false": {
+      "model": "custom:block/tripwire/n",
+      "y": 180
+    },
+    "attached=false,east=false,north=false,powered=false,south=true,west=true": {
+      "model": "custom:block/tripwire/ne",
+      "y": 180
+    },
+    "attached=false,east=false,north=true,powered=false,south=false,west=false": {
+      "model": "custom:block/tripwire/n"
+    },
+    "attached=false,east=false,north=true,powered=false,south=false,west=true": {
+      "model": "custom:block/tripwire/ne",
+      "y": 270
+    },
+    "attached=false,east=false,north=true,powered=false,south=true,west=false": {
+      "model": "custom:block/tripwire/ns"
+    },
+    "attached=false,east=false,north=true,powered=false,south=true,west=true": {
+      "model": "custom:block/tripwire/nse",
+      "y": 180
+    },
+    "attached=false,east=true,north=false,powered=false,south=false,west=false": {
+      "model": "custom:block/tripwire/n",
+      "y": 90
+    },
+    "attached=false,east=true,north=false,powered=false,south=false,west=true": {
+      "model": "custom:block/tripwire/ns",
+      "y": 90
+    },
+    "attached=false,east=true,north=false,powered=false,south=true,west=false": {
+      "model": "custom:block/tripwire/ne",
+      "y": 90
+    },
+    "attached=false,east=true,north=false,powered=false,south=true,west=true": {
+      "model": "custom:block/tripwire/nse",
+      "y": 90
+    },
+    "attached=false,east=true,north=true,powered=false,south=false,west=false": {
+      "model": "custom:block/tripwire/ne"
+    },
+    "attached=false,east=true,north=true,powered=false,south=false,west=true": {
+      "model": "custom:block/tripwire/nse",
+      "y": 270
+    },
+    "attached=false,east=true,north=true,powered=false,south=true,west=false": {
+      "model": "custom:block/tripwire/nse"
+    },
+    "attached=false,east=true,north=true,powered=false,south=true,west=true": {
+      "model": "custom:block/tripwire/nsew"
+    },
+    "attached=true,east=false,north=false,powered=false,south=false,west=false": {
+      "model": "custom:block/tripwire/attached_ns"
+    },
+    "attached=true,east=false,north=false,powered=false,south=false,west=true": {
+      "model": "custom:block/tripwire/attached_n",
+      "y": 270
+    },
+    "attached=true,east=false,north=false,powered=false,south=true,west=false": {
+      "model": "custom:block/tripwire/attached_n",
+      "y": 180
+    },
+    "attached=true,east=false,north=false,powered=false,south=true,west=true": {
+      "model": "custom:block/tripwire/attached_ne",
+      "y": 180
+    },
+    "attached=true,east=false,north=true,powered=false,south=false,west=false": {
+      "model": "custom:block/tripwire/attached_n"
+    },
+    "attached=true,east=false,north=true,powered=false,south=false,west=true": {
+      "model": "custom:block/tripwire/attached_ne",
+      "y": 270
+    },
+    "attached=true,east=false,north=true,powered=false,south=true,west=false": {
+      "model": "custom:block/tripwire/attached_ns"
+    },
+    "attached=true,east=false,north=true,powered=false,south=true,west=true": {
+      "model": "custom:block/tripwire/attached_nse",
+      "y": 180
+    },
+    "attached=true,east=true,north=false,powered=false,south=false,west=false": {
+      "model": "custom:block/tripwire/attached_n",
+      "y": 90
+    },
+    "attached=true,east=true,north=false,powered=false,south=false,west=true": {
+      "model": "custom:block/tripwire/attached_ns",
+      "y": 90
+    },
+    "attached=true,east=true,north=false,powered=false,south=true,west=false": {
+      "model": "custom:block/tripwire/attached_ne",
+      "y": 90
+    },
+    "attached=true,east=true,north=false,powered=false,south=true,west=true": {
+      "model": "custom:block/tripwire/attached_nse",
+      "y": 90
+    },
+    "attached=true,east=true,north=true,powered=false,south=false,west=false": {
+      "model": "custom:block/tripwire/attached_ne"
+    },
+    "attached=true,east=true,north=true,powered=false,south=false,west=true": {
+      "model": "custom:block/tripwire/attached_nse",
+      "y": 270
+    },
+    "attached=true,east=true,north=true,powered=false,south=true,west=false": {
+      "model": "custom:block/tripwire/attached_nse"
+    },
+    "attached=true,east=true,north=true,powered=false,south=true,west=true": {
+      "model": "custom:block/tripwire/attached_nsew"
+    },
+    "attached=false,east=false,north=false,powered=true,south=false,west=false": {
+      "model": "custom:block/tripwire/ns_powered"
+    },
+    "attached=false,east=false,north=false,powered=true,south=false,west=true": {
+      "model": "custom:block/tripwire/n_powered",
+      "y": 270
+    },
+    "attached=false,east=false,north=false,powered=true,south=true,west=false": {
+      "model": "custom:block/tripwire/n_powered",
+      "y": 180
+    },
+    "attached=false,east=false,north=false,powered=true,south=true,west=true": {
+      "model": "custom:block/tripwire/ne_powered",
+      "y": 180
+    },
+    "attached=false,east=false,north=true,powered=true,south=false,west=false": {
+      "model": "custom:block/tripwire/n_powered"
+    },
+    "attached=false,east=false,north=true,powered=true,south=false,west=true": {
+      "model": "custom:block/tripwire/ne_powered",
+      "y": 270
+    },
+    "attached=false,east=false,north=true,powered=true,south=true,west=false": {
+      "model": "custom:block/tripwire/ns_powered"
+    },
+    "attached=false,east=false,north=true,powered=true,south=true,west=true": {
+      "model": "custom:block/tripwire/nse_powered",
+      "y": 180
+    },
+    "attached=false,east=true,north=false,powered=true,south=false,west=false": {
+      "model": "custom:block/tripwire/n_powered",
+      "y": 90
+    },
+    "attached=false,east=true,north=false,powered=true,south=false,west=true": {
+      "model": "custom:block/tripwire/ns_powered",
+      "y": 90
+    },
+    "attached=false,east=true,north=false,powered=true,south=true,west=false": {
+      "model": "custom:block/tripwire/ne_powered",
+      "y": 90
+    },
+    "attached=false,east=true,north=false,powered=true,south=true,west=true": {
+      "model": "custom:block/tripwire/nse_powered",
+      "y": 90
+    },
+    "attached=false,east=true,north=true,powered=true,south=false,west=false": {
+      "model": "custom:block/tripwire/ne_powered"
+    },
+    "attached=false,east=true,north=true,powered=true,south=false,west=true": {
+      "model": "custom:block/tripwire/nse_powered",
+      "y": 270
+    },
+    "attached=false,east=true,north=true,powered=true,south=true,west=false": {
+      "model": "custom:block/tripwire/nse_powered"
+    },
+    "attached=false,east=true,north=true,powered=true,south=true,west=true": {
+      "model": "custom:block/tripwire/nsew_powered"
+    },
+    "attached=true,east=false,north=false,powered=true,south=false,west=false": {
+      "model": "custom:block/tripwire/attached_ns_powered"
+    },
+    "attached=true,east=false,north=false,powered=true,south=false,west=true": {
+      "model": "custom:block/tripwire/attached_n_powered",
+      "y": 270
+    },
+    "attached=true,east=false,north=false,powered=true,south=true,west=false": {
+      "model": "custom:block/tripwire/attached_n_powered",
+      "y": 180
+    },
+    "attached=true,east=false,north=false,powered=true,south=true,west=true": {
+      "model": "custom:block/tripwire/attached_ne_powered",
+      "y": 180
+    },
+    "attached=true,east=false,north=true,powered=true,south=false,west=false": {
+      "model": "custom:block/tripwire/attached_n_powered"
+    },
+    "attached=true,east=false,north=true,powered=true,south=false,west=true": {
+      "model": "custom:block/tripwire/attached_ne_powered",
+      "y": 270
+    },
+    "attached=true,east=false,north=true,powered=true,south=true,west=false": {
+      "model": "custom:block/tripwire/attached_ns_powered"
+    },
+    "attached=true,east=false,north=true,powered=true,south=true,west=true": {
+      "model": "custom:block/tripwire/attached_nse_powered",
+      "y": 180
+    },
+    "attached=true,east=true,north=false,powered=true,south=false,west=false": {
+      "model": "custom:block/tripwire/attached_n_powered",
+      "y": 90
+    },
+    "attached=true,east=true,north=false,powered=true,south=false,west=true": {
+      "model": "custom:block/tripwire/attached_ns_powered",
+      "y": 90
+    },
+    "attached=true,east=true,north=false,powered=true,south=true,west=false": {
+      "model": "custom:block/tripwire/attached_ne_powered",
+      "y": 90
+    },
+    "attached=true,east=true,north=false,powered=true,south=true,west=true": {
+      "model": "custom:block/tripwire/attached_nse_powered",
+      "y": 90
+    },
+    "attached=true,east=true,north=true,powered=true,south=false,west=false": {
+      "model": "custom:block/tripwire/attached_ne_powered"
+    },
+    "attached=true,east=true,north=true,powered=true,south=false,west=true": {
+      "model": "custom:block/tripwire/attached_nse_powered",
+      "y": 270
+    },
+    "attached=true,east=true,north=true,powered=true,south=true,west=false": {
+      "model": "custom:block/tripwire/attached_nse_powered"
+    },
+    "attached=true,east=true,north=true,powered=true,south=true,west=true": {
+      "model": "custom:block/tripwire/attached_nsew_powered"
+    }
+  }
+}

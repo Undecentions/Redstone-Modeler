@@ -1,0 +1,73 @@
+{
+  "variants": {
+    "extended=_false,facing=down": {
+      "model": "minecraft:block/piston/normal",
+      "x": 90
+    },
+    "extended=_false,facing=east": {
+      "model": "minecraft:block/piston/normal",
+      "y": 90
+    },
+    "extended=_false,facing=north": {
+      "model": "minecraft:block/piston/normal"
+    },
+    "extended=_false,facing=south": {
+      "model": "minecraft:block/piston/normal",
+      "y": 180
+    },
+    "extended=_false,facing=up": {
+      "model": "minecraft:block/piston/normal",
+      "x": 270
+    },
+    "extended=_false,facing=west": {
+      "model": "minecraft:block/piston/normal",
+      "y": 270
+    },
+    "extended=_true,facing=down": {
+      "model": "custom:block/piston/base",
+      "x": 90
+    },
+    "extended=_true,facing=east": {
+      "model": "custom:block/piston/base",
+      "y": 90
+    },
+    "extended=_true,facing=north": {
+      "model": "custom:block/piston/base"
+    },
+    "extended=_true,facing=south": {
+      "model": "custom:block/piston/base",
+      "y": 180
+    },
+    "extended=_true,facing=up": {
+      "model": "custom:block/piston/base",
+      "x": 270
+    },
+    "extended=_true,facing=west": {
+      "model": "custom:block/piston/base",
+      "y": 270
+    },
+    "extended=head,facing=down": {
+      "model": "minecraft:block/piston/head",
+      "x": 90
+    },
+    "extended=head,facing=east": {
+      "model": "minecraft:block/piston/head",
+      "y": 90
+    },
+    "extended=head,facing=north": {
+      "model": "minecraft:block/piston/head"
+    },
+    "extended=head,facing=south": {
+      "model": "minecraft:block/piston/head",
+      "y": 180
+    },
+    "extended=head,facing=up": {
+      "model": "minecraft:block/piston/head",
+      "x": 270
+    },
+    "extended=head,facing=west": {
+      "model": "minecraft:block/piston/head",
+      "y": 270
+    }
+  }
+}

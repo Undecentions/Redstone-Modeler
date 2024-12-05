@@ -1,3 +1,14 @@
-# ESLint's 4000 files getting out of hand, kept config stuff in case
+.vscode
+
+/# ESLint's 4000 files getting out of hand, kept config stuff in case
 # someone works on it and lints the code or something
 node_modules
+
+# Python venv
+.venv
+
+assets_renderer/__pycache__
+
+# Minecraft assets, it's so that git doesn't have ten thousand more files,
+# and also because I'm afraid of copyright issues
+assets_renderer/mcassets/minecraft
