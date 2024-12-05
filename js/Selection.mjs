@@ -85,6 +85,7 @@ export class Selection {
         Selection.selection_bars.property_2.replaceChildren();
 
         Selection.selection_bars.property_1.parentElement.style.display = Images.heights[name] <= 1 ? "none" : "block";
+        Selection.selection_bars.property_2.parentElement.style.display = Images.widths[name] <= 1 ? "none" : "block";
 
         for (let i = 0; i < Images.heights[name]; i++) {
             const property_bar_1_item = document.createElement("div");
