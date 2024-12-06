@@ -237,6 +237,16 @@ function main() {
     layer_number.innerText = `Layer: ${model.layer}`;
 }
 
+window.addEventListener("error", (e) => {
+    const { message, filename, lineno, colno } = e;
+    alert(
+`This message will be made unobtrusive later.
+An error occured:
+${message}
+${filename}:${lineno}, ${colno}`,
+    );
+});
+
 document.getElementById("logo_source").src = `logo${window.innerWidth > window.innerHeight ? "_wide" : "_tall"}.mp4`;
 document.getElementById("logo").load();
 const splash = new Promise(resolve => setTimeout(resolve, 4000));
