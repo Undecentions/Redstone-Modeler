@@ -238,12 +238,11 @@ function main() {
 }
 
 window.addEventListener("error", (e) => {
-    const { message, filename, lineno, colno } = e;
+    const { error } = e;
     alert(
 `This message will be made unobtrusive later.
 An error occured:
-${message}
-${filename}:${lineno}, ${colno}`,
+${error.stack}`,
     );
 });
 
