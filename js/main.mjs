@@ -59,9 +59,9 @@ function canvas_set(e, hover = false) {
     // and if it's on a different block than last time
     if (
         grid_x < 0
-        || grid_x > model.size.y
+        || grid_x >= model.size.y
         || grid_y < 0
-        || grid_y > model.size.z
+        || grid_y >= model.size.z
         || (
             e.type !== "mousedown"
             && canvas_hover.x === grid_x
