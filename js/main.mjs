@@ -205,9 +205,8 @@ function main() {
             model.load(document.getElementById("load_input").value);
             show_message(load_button, "Loaded");
         }
-        catch (e) {
+        catch {
             show_message(load_button, "Invalid code", true);
-            throw e;
         }
     });
 
