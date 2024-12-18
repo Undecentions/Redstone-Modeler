@@ -135,7 +135,7 @@ window.addEventListener("error", (e) => {
     alert(
 `This message will be made unobtrusive later.
 An error occured:
-${error.stack}`,
+${e.error.stack}`,
     );
 });
 
