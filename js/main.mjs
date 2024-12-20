@@ -9,10 +9,7 @@ import { Canvas } from "./Canvas.mjs";
 import * as Images from "./Images.mjs";
 import { Model } from "./Model.mjs";
 import { Selection } from "./Selection.mjs";
-import {
-    BLOCK_FULL_HEIGHT,
-    MODEL_SIZE,
-} from "./config.mjs";
+import { BLOCK_FULL_HEIGHT, MODEL_SIZE } from "./config.mjs";
 
 /**
  * @type {HTMLCanvasElement}
@@ -59,6 +56,7 @@ function main() {
 
     canvas_element.addEventListener("touchmove", (e) => {
         if (e.touches.length > 1 || !e.cancelable) {
+            // Move with multiple fingers on mobile
             return;
         }
         e.preventDefault();
@@ -125,13 +123,12 @@ function main() {
         else {
             show_message(layer_backwards, "End", true);
         }
-        layer_number.innerText = `Layer: ${model.layer}`;
+        layer_number.innerText = `z = ${model.layer}`;
     });
-    layer_number.innerText = `Layer: ${model.layer}`;
+    layer_number.innerText = `z = ${model.layer}`;
 }
 
 window.addEventListener("error", (e) => {
-    const { error } = e;
     alert(
 `This message will be made unobtrusive later.
 An error occured:
@@ -150,7 +147,7 @@ document.getElementById("logo").load();
 await Images.load_images(Images.imageURLs);
 console.log("Images loaded:", new Date().getTime() - start);
 
-const splash = new Promise(resolve => setTimeout(resolve, 4000));
+const splash = new Promise(resolve => setTimeout(resolve, 2000));
 const load_main = new Promise((resolve) => {
     main();
     resolve();
