@@ -5,7 +5,7 @@ j_custom = Joiner("assets_renderer/mcassets", "custom", "assets")
 
 
 def render_blocks():
-    def parse_blocks(*args: list[str], out=None) -> None:
+    def parse_blocks(*args: str, out=None) -> None:
         if len(args) == 1:
             out = args[0]
         elif out is None:
@@ -35,7 +35,7 @@ def render_blocks():
     parse_blocks("mangrove_roots")
     j.parse_state(["smooth_stone_slab.json"], ["type"], "smooth_stone_slab.png")
     j.parse_state(["quartz_slab.json"], ["type"], "quartz_slab.png")
-    
+
     def stair_key(d: dict[str, str], /):
         return d["shape"] not in {"inner_right", "outer_right"}
     j.parse_state(
@@ -169,7 +169,7 @@ def render_stone_blocks():
         if stone:
             stones.append("stone")
         return ["_".join((e, s)) + ".json" for e in stones]
-    
+
     def wall_key(d: dict[str, str], /):
         north, west, south, east, up = d["north"], d["west"], d["south"], d["east"], d["up"]
         return (
@@ -179,7 +179,7 @@ def render_stone_blocks():
             and (
                 # If center post, no 2 opposite sides can both be tall
                 up == "true" and not (west == east == "tall" or north == south == "tall")
-                
+
                 # No center post means either 2 opposite sides or all 4
                 or up == "false" and (
                     west == east
@@ -295,11 +295,11 @@ def render_custom_blocks():
     # Tripwire is to thin to show up, so the model was tweaked a bit
     j_custom.parse_state(["tripwire.json"], ["powered", "north", "west", "east", "south", "attached"], "tripwire.png")
     j_custom.parse_state(["tripwire_hook.json"], ["facing", "attached", "powered"], "tripwire_hook.png")
-    
+
     # Custom extended piston models (piston base) to include part of the shaft
     j_custom.parse_state(["piston.json"], ["facing", "extended"], "piston.png")
     j_custom.parse_state(["sticky_piston.json"], ["facing", "extended"], "sticky_piston.png")
-    
+
     # Redstone Tweaks has 2 commas in the scaffolding.json, changed to one
     j_custom.parse_state(["scaffolding.json"], ["distance", "bottom"], "scaffolding.png")
 
