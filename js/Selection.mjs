@@ -66,6 +66,7 @@ export class Selection {
                         = this.selection_element.selector.style.backgroundImage;
                     this.selection_element.hotbar.style.backgroundSize
                         = this.selection_element.selector.style.backgroundSize;
+                    this.selection_element.hotbar.style.backgroundPosition = "0 0";
                 }
                 this.mode = Selection.selector_modes.HOTBAR;
                 this.open_property_selection();
