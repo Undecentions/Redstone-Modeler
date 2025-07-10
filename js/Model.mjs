@@ -13,7 +13,7 @@ import {
 export class Model {
     /**
      *
-     * @param {{x: Number, y: Numder, z: Number}} size Size of the model
+     * @param {{x: Number, y: Number, z: Number}} size Size of the model
      * @param {CanvasRenderingContext2D} canvas_context Canvas context that this model is to be drawn on
      */
     constructor(size, canvas_context) {
@@ -99,7 +99,7 @@ export class Model {
 
     /**
      * Gets a block in the model
-     * @param {{x: Number, y: Number, z: Numder}} param0 position of block
+     * @param {{x: Number, y: Number, z: Number}} param0 position of block
      * @returns the block in the position
      */
     get({ x, y, z }) {
