@@ -13,7 +13,7 @@ import {
 export class Model {
     /**
      *
-     * @param {{x: Number, y: Number, z: Number}} size Size of the model
+     * @param {{x: number, y: number, z: number}} size Size of the model
      * @param {CanvasRenderingContext2D} canvas_context Canvas context that this model is to be drawn on
      */
     constructor(size, canvas_context) {
@@ -68,7 +68,7 @@ export class Model {
 
     /**
      * Load save code into model
-     * @param {String} code Save code
+     * @param {string} code Save code
      */
     load(code) {
         const save_object = JSON.parse(
@@ -99,7 +99,7 @@ export class Model {
 
     /**
      * Gets a block in the model
-     * @param {{x: Number, y: Number, z: Number}} param0 position of block
+     * @param {{x: number, y: number, z: number}} param0 position of block
      * @returns the block in the position
      */
     get({ x, y, z }) {
@@ -115,9 +115,9 @@ export class Model {
 
     /**
      * Sets a block (texture) in the model
-     * @param {{x: Number, y: Number, z: Number}} position position of block
-     * @param {{name: String, y: Number, z: Number}} texture name of the texture
-     * @param {Boolean} hover whether the mouse is down
+     * @param {{x: number, y: number, z: number}} position position of block
+     * @param {{name: string, y: number, z: number}} texture name of the texture
+     * @param {boolean} hover whether the mouse is down
      */
     set(position, texture, hover = false) {
         this.get(position).set_block(texture, hover);
@@ -126,7 +126,7 @@ export class Model {
 
     /**
      * Changes to another layer
-     * @param {Number} change change in the layer number
+     * @param {number} change change in the layer number
      */
     change_layer(change) {
         this.layer += change;

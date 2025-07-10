@@ -17,8 +17,8 @@ export class ModelBlock {
      * Creates a model block
      * @param {Model} parent_model model that this block is on
      * @param {HTMLCanvasElement} parent_canvas canvas this block is on
-     * @param {{x: Number, y: Number, z: Number}} position position of block
-     * @param {{name: String, y: Number, z: Number}} texture texture of the block
+     * @param {{x: number, y: number, z: number}} position position of block
+     * @param {{name: string, y: number, z: number}} texture texture of the block
      */
     constructor(
         parent_model,
@@ -38,9 +38,9 @@ export class ModelBlock {
 
     /**
      * Draws the block raw
-     * @param {Boolean} top if the top should be drawn
-     * @param {Boolean} middle if the middle (front face excluding bottom face) should be drawn
-     * @param {Boolean} bottom if the bottom (front face in the same position as the bottom) should be drawn
+     * @param {boolean} top if the top should be drawn
+     * @param {boolean} middle if the middle (front face excluding bottom face) should be drawn
+     * @param {boolean} bottom if the bottom (front face in the same position as the bottom) should be drawn
      */
     draw(top = true, middle = true, bottom = true) {
         if (top) {
@@ -93,8 +93,8 @@ export class ModelBlock {
     /**
      * Sets the texture of a block, drawing the  top of the block lower,
      * then the block, then the bottom of the block higher.
-     * @param {{name: String, y: Number, z: Number}} texture new texture
-     * @param {Boolean} hover if the mouse is down or not, used to determine opacity
+     * @param {{name: string, y: number, z: number}} texture new texture
+     * @param {boolean} hover if the mouse is down or not, used to determine opacity
      */
     set_block({ name, y, z }, hover = false) {
         this.texture.y = y;
