@@ -1,4 +1,3 @@
-import { image_name_encodings, image_name_decodings } from "./Images.mjs";
 import { ModelBlock } from "./ModelBlock.mjs";
 import {
     BLOCK_FULL_HEIGHT,
@@ -52,13 +51,17 @@ export class Model {
      * Generate model save code and copy to clipboard
      */
     save() {
+        const palette = [...new Set(this.blocks.flat(2).map(model_block => model_block.texture.name))]; // Maps are pain to encode with
         const save_object = this.blocks.map(s1 => s1.map(s2 => s2.map((model_block) => {
             const { name, y, z } = model_block.texture;
-            return [image_name_encodings[name], y, z];
+            return [palette.indexOf(name), y, z];
         })));
         // eslint-disable-next-line no-undef
         LZMA.compress(
-            JSON.stringify(save_object),
+            JSON.stringify({
+                palette: palette,
+                data: save_object,
+            }),
             9,
             result => navigator.clipboard.writeText(btoa(
                 result.map(v => String.fromCharCode(v + 128)).join(""),
@@ -71,7 +74,7 @@ export class Model {
      * @param {string} code Save code
      */
     load(code) {
-        const save_object = JSON.parse(
+        const { palette, data: save_object } = JSON.parse(
             // eslint-disable-next-line no-undef
             LZMA.decompress(
                 atob(code).split("").map(v => v.codePointAt(0) - 128),
@@ -87,7 +90,7 @@ export class Model {
                         this,
                         this.canvases[x],
                         { x, y, z },
-                        { name: image_name_decodings[id], y: y_, z: z_ },
+                        { name: palette[id], y: y_, z: z_ },
                     );
                     block.draw();
                     return block;

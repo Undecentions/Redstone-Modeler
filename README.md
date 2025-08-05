@@ -20,7 +20,7 @@ RSM seems to be such a common abbreviation, but no matter if it's the mod, the p
 - 2D block states. Select the state with a temporary panel, then put it down, instead of clicking 5 times each on some pistons. The second dimension is used for blocks like redstone dust, where clicking hundreds of times is impractical. Instead, there are 2 selection bars for each signal strength and shape, 30 * 16.
 - Preview on hover. Detail, but useful when working in 3D models. Note that the hover does not update on scroll, although not important.
 - Drag. No more spam clicking while moving the mouse around. On mobile, scroll with 2 fingers. Note that because of the number of events sent, if you drag too fast, some blocks might be missed. Likely, the best solution is to draw lines between points, but that is not a priority.
-- Saving. Uses LZMA ([LZMA-JS](https://github.com/LZMA-JS/LZMA-JS)) so that the code is not hundreds of thousands of characters long. This feature was present in RS Editor, but it was on URL, and in my opinion this is better, and since this is 3D there must be compression. Note that a change to the saving mechanism is planned.
+- Saving. Uses LZMA ([LZMA-JS](https://github.com/LZMA-JS/LZMA-JS)) so that the code is not hundreds of thousands of characters long. This feature was present in RS Editor, but it was on URL, and in my opinion this is better, and since this is 3D there must be compression. Saving was recently reworked to use a schema, which should be very future-proof.
 
 ## How am I supposed to use this???
 With all those features, RSM may get confusing fairly quickly.
@@ -35,7 +35,6 @@ Finally, press the copy or save button when you're finished.
 
 ## To do
 - Change the texture rendering slant angle to make it look clearer.
-- More versatile saving.
 - Keybinds.
 - Logo duration tweak, likely to shorten it.
 - Model automatically resizes when you reach an edge.
