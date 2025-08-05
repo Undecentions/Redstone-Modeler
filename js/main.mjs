@@ -130,9 +130,7 @@ function main() {
 
 window.addEventListener("error", (e) => {
     alert(
-`This message will be made unobtrusive later.
-An error occured:
-${e.error.stack}`,
+        `Temporary popup: An error occured:\n${e.error.stack}`,
     );
 });
 
