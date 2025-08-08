@@ -1,0 +1,30 @@
+{
+  "variants": {
+    "facing=up": {
+      "model": "custom:entity/shulker_box"
+    },
+    "facing=down": {
+      "model": "custom:entity/shulker_box",
+      "x": 180
+    },
+    "facing=north": {
+      "model": "custom:entity/shulker_box",
+      "x": 90
+    },
+    "facing=east": {
+      "model": "custom:entity/shulker_box",
+      "y": 90,
+      "x": 90
+    },
+    "facing=south": {
+      "model": "custom:entity/shulker_box",
+      "y": 180,
+      "x": 90
+    },
+    "facing=west": {
+      "model": "custom:entity/shulker_box",
+      "y": 270,
+      "x": 90
+    }
+  }
+}

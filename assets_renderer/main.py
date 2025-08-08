@@ -212,6 +212,7 @@ def render_redstone():
     # The default sorting (lexiographical) sorts mode as [compare, subtract] which is fine
     j.parse_state(["comparator.json"], ["powered", "facing", "mode"], "comparator.png")
     j.parse_state(["observer.json"], ["facing", "powered"], "observer.png")
+    j.parse_state(["redstone_lamp.json"], ["lit"], "redstone_lamp.png")
     j.parse_state(["copper_bulb.json"], ["lit", "powered"], "copper_bulb.png")
     j.parse_state(
         ["crafter.json"], ["orientation", "triggered", "crafting"], "crafter.png"
@@ -291,6 +292,8 @@ def render_custom_blocks():
         ["redstone_torch.json"], ["lit", "facing"], "redstone_torch.png"
     )
     j_custom.parse_state(["chest.json"], ["facing", "type"], "chest.png")
+    j_custom.parse_state(["shulker_box.json"], ["facing"], "shulker_box.png")
+    j_custom.parse_state(["bell.json"], ["powered", "attachment", "facing"], "bell.png")
 
     # Tripwire is to thin to show up, so the model was tweaked a bit
     j_custom.parse_state(["tripwire.json"], ["powered", "north", "west", "east", "south", "attached"], "tripwire.png")
@@ -313,3 +316,4 @@ render_storage_blocks()
 render_wooden_blocks()
 render_stone_blocks()
 render_time_takers()
+render_custom_blocks()
