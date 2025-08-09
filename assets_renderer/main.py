@@ -217,6 +217,7 @@ def render_redstone():
     j.parse_state(
         ["crafter.json"], ["orientation", "triggered", "crafting"], "crafter.png"
     )
+    j.parse_state(["tnt.json"], [], "tnt.png")
     j.parse_state(["target.json"], ["power"], "target.png")
     j.parse_state(["daylight_detector.json"], ["inverted", "power"], "daylight_detector.png")
     j.parse_state(["lever.json"], ["powered", "face", "facing"], "lever.png")

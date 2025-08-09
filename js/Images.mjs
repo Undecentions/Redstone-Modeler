@@ -31,6 +31,7 @@ export const imageURLs = [
     "leaves.png",
     "copper_bulb.png",
     "target.png",
+    "tnt.png",
     "daylight_detector.png",
     "trapdoor.png",
     "door.png",
