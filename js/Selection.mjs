@@ -28,7 +28,7 @@ export class Selection {
     }
 
     initialize() {
-        for (let i = 0; i < SELECTOR_ITEM_COUNT; i++) {
+        for (let i = 0; i < Images.imageURLs.length; i++) {
             const selector_item = document.createElement("div");
             selector_item.id = `selector_item_${i}`;
             selector_item.classList.add("selection_item");

@@ -4,7 +4,6 @@ export const BLOCK_WIDTH = IMAGE_WIDTH;
 export const BLOCK_FULL_HEIGHT = IMAGE_HEIGHT;
 export const BLOCK_HEIGHT = (BLOCK_FULL_HEIGHT * 2) / 3; // Currently ratio top_face:bottom_face is 1:2
 export const BLOCK_TOP_HEIGHT = BLOCK_FULL_HEIGHT - BLOCK_HEIGHT;
-export const SELECTOR_ITEM_COUNT = 60;
 export const HOTBAR_ITEM_COUNT = 16;
 
 export const DEFAULT_BLOCK = "assets/air.png";
