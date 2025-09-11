@@ -1,5 +1,5 @@
 import * as Images from "./Images.mjs";
-import { BLOCK_FULL_HEIGHT, BLOCK_WIDTH, DEFAULT_BLOCK, HOTBAR_ITEM_COUNT, IMAGE_WIDTH, SELECTOR_ITEM_COUNT } from "./config.mjs";
+import { BLOCK_FULL_HEIGHT, BLOCK_WIDTH, DEFAULT_BLOCK, HOTBAR_ITEM_COUNT, IMAGE_WIDTH } from "./config.mjs";
 
 export class Selection {
     // Funny JavaScript enum
