@@ -17,13 +17,13 @@ class ModelElement:
             self.rotation = element["rotation"]
         else:
             self.rotation = None
-    
+
     def do_textures(self) -> None:
         """
         Compute textures in the element by following references.
         Minecraft uses `#` as a reference, so #all would refer to
         the `"all"` entry in `"textures"`.
-        
+
         Returns
         -------
         None

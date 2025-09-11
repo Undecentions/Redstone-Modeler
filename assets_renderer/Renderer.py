@@ -265,7 +265,7 @@ class Renderer:
         Returns
         -------
         None
-        
+
         Raises
         ------
         :exc:`ValueError`

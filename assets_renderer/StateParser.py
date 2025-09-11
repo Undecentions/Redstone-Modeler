@@ -93,7 +93,7 @@ class StateParser(Parser):
             "L": "left",
             "R": "right",
         }
-        
+
         def parse_shorthand(s: tuple | str, /):
             return tuple("_".join(shorthands[v] for v in p) for p in s)
 
@@ -123,7 +123,7 @@ class StateParser(Parser):
                 # Stair, sort shape
                 sorted_states[k_] = sorted(v_, key=lambda x: chest_shape.index(x))
             else:
-                sorted_states[k_] = sorted(v_) 
+                sorted_states[k_] = sorted(v_)
                 # lexiographical just so it's not awfully random
             # and a lot of other random things, such as:
             # - walls, with "none," "low," "high," (only "low" and "high" since "none" is nothing, multipart)
@@ -133,12 +133,12 @@ class StateParser(Parser):
     def get_state(self, state: dict[str, str]) -> list[dict]:
         """
         Get the state from a dictionary of states.
-        
+
         Parameters
         ----------
         states
             A dictionary of block states.
-        
+
         Returns
         -------
         list
@@ -178,7 +178,7 @@ class StateParser(Parser):
                         if k in {"OR", "AND"}:
                             if isinstance(v, list):
                                 if (
-                                    k == "AND"and not all(dfs(s) for s in v) 
+                                    k == "AND"and not all(dfs(s) for s in v)
                                     or k == "OR" and not any(dfs(s) for s in v)
                                 ):
                                     return False

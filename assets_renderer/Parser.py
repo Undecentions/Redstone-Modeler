@@ -13,11 +13,11 @@ class Parser:
 
     def __init__(self, file: str):
         self.file = file
-    
+
     def load(self) -> None:
         """
         Opens the file and reads it, setting :attr:`properties`
-        
+
         Returns
         -------
         None
@@ -29,7 +29,7 @@ class Parser:
     def parse(self) -> None:
         """
         Parses and processes the file. Usually calls :meth:`load`.
-        
+
         Returns
         -------
         None

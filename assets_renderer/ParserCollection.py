@@ -16,12 +16,12 @@ class ParserCollection:
     def add(self, model: str) -> None:
         """
         Add model to the collection.
-        
+
         Parameters
         ----------
         model
             The model to add, as an identifier name.
-        
+
         Returns
         -------
         None
@@ -37,12 +37,12 @@ class ParserCollection:
     def get(self, model: str) -> "ModelParser.ModelParser":
         """
         Gets a model from the collection.
-        
+
         Parameters
         ----------
         model
             An identifier for a model to get.
-        
+
         Returns
         -------
         :class:`~.ModelParser`

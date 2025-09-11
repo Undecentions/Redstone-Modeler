@@ -10,7 +10,7 @@ class ModelParser(Parser):
 
     Rough format:
     .. code-block:: json
-    
+
         {
             "parent": "parent/identifier/path",
             "textures": {
@@ -54,13 +54,13 @@ class ModelParser(Parser):
         """
         Recursively gets elements of the model. Models can either have
         elements, or have a parent providing the elements.
-        
+
         Parameters
         ----------
         top_class
             The original class that called in the recursion, used when
             creating the :class:`~.ModelElement`.
-        
+
         Returns
         -------
         list
@@ -83,12 +83,12 @@ class ModelParser(Parser):
         Get the given texture file name from reference recursively.
         Texture must either exist on the model or in one of its parents,
         although for the majority of cases it exists in the child.
-        
+
         Parameters
         ----------
         texture
             The texture reference (the part after "#") name.
-        
+
         Returns
         -------
         str

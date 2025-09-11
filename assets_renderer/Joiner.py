@@ -39,7 +39,7 @@ class Joiner:
     ) -> None:
         """
         Parse state of file, printing its status as it goes.
-        
+
         Parameters
         ----------
         files
@@ -57,11 +57,11 @@ class Joiner:
         color
             A function that is called for each value using the value dictionary
             (similar to `key`) that returns the color of the block, used for color maps.
-        
+
         Returns
         -------
         None
-        
+
         Raises
         ------
         :exc:`ValueError`
@@ -69,7 +69,7 @@ class Joiner:
         """
         # If using multiple files, and keys_order exists, they must be
         # the exact same format for all the files, otherwise the renderer breaks.
-        
+
         # Note: "by" means width by height
         # If key exists, skipped textures are counted as non-existent
         # If one file and no keys_order, 1 by 1
