@@ -173,12 +173,6 @@ class Renderer:
             Whether to multiply by square root 2 at the end
             (it's assumed that the angle is 45 degrees).
         """
-        # Minecraft does +z going down, and the thing below
-        # is the other way, so angle must be flipped
-        # +360 just for the % 90 check although there's a chance
-        # that Python negative indicies do it anyways
-        if axis == "y":
-            angle = -angle + 360
         angle_rad = np.deg2rad(angle)
         indicies = [0, 1, 2]
         indicies.remove("xyz".index(axis))
@@ -481,17 +475,18 @@ class Renderer:
                     for face_processed in element_processed:
                         slope_x, slope_y = face_processed.slopes
                         p1_x_intercept, p1_y_intercept, p2_x_intercept, p2_y_intercept = face_processed.intercepts
+                        x_middle, y_middle = x + 0.5001, y + 0.5001
 
                         # 2a:
                         # Possibility of divide by 0 checked above
-                        x_intercept = y + 0.5 - slope_x * (x + 0.5) if slope_x is not None else x + 0.5
+                        x_intercept = y_middle - slope_x * (x_middle) if slope_x is not None else x_middle
                         texture_x = (x_intercept - p1_x_intercept) / (p2_x_intercept - p1_x_intercept)
-                        if not 0 < texture_x < 1:
+                        if not 0 <= texture_x < 1:
                             continue
 
-                        y_intercept = y + 0.5 - slope_y * (x + 0.5) if slope_y is not None else x + 0.5
+                        y_intercept = y_middle - slope_y * (x_middle) if slope_y is not None else x_middle
                         texture_y = (y_intercept - p1_y_intercept) / (p2_y_intercept - p1_y_intercept)
-                        if not 0 < texture_y < 1:
+                        if not 0 <= texture_y < 1:
                             continue
 
                         face_3D: npt.NDArray[np.float32] = face_processed.face_3D
@@ -530,12 +525,6 @@ class Renderer:
                                     f"Texture rotation {other} not in 0, 90, 180, 270."
                                 )
 
-                        # Fix rounding edge cases
-                        if x_inv:
-                            texture_x -= 0.001
-                        if y_inv:
-                            texture_y -= 0.001
-
                         # 2d:
                         u, v, s, t = face_processed.uv
 
@@ -566,5 +555,7 @@ class Renderer:
                                     int(pixel[3] * color[3] / 255),
                                 )
                             self.output.putpixel((x, y), pixel)
+
+                        # Useful debugging things
                         # self.output.putpixel((x, y), (texture_x_pixels * 255 // 16, texture_y_pixels * 255 // 16, 0, 255))
                         # self.output.putpixel((x, y), (int(texture_x * 255), int(texture_y * 255), 0, 255))

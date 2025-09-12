@@ -77,6 +77,7 @@ def render_colored_blocks():
         ]
 
     j.parse_state(color("glass", "stained") + ["tinted_glass.json"], [], "glass.png")
+    j.parse_state(color("glass_pane", "stained"), ["north", "west", "south", "east"], "glass_pane.png")
     j.parse_state(color("terracotta"), [], "terracotta.png")
     j.parse_state(
         color("glazed_terracotta", raw=False), ["facing"], "glazed_terracotta.png"
@@ -262,6 +263,7 @@ def render_time_takers():
 def render_fillers():
     j.parse_state(["composter.json"], ["level"], "composter.png")
     j.parse_state(["water_cauldron.json"], ["level"], "water_cauldron.png")
+    j.parse_state(["cauldron.json", "lava_cauldron.json"], [], "cauldron.png")
     j.parse_state(["cake.json"], ["bites"], "cake.png")
 
 
