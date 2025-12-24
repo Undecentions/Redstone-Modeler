@@ -158,8 +158,7 @@ class Renderer:
         rescale: bool = False,
     ) -> None:
         """
-        Rotate faces around axis in place. Note that in Minecraft, +z goes down,
-        so rotation around the y axis rotates counter-clockwise.
+        Rotate faces around axis in place.
 
         Parameters
         ----------
