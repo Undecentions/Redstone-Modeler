@@ -11,7 +11,7 @@ from typing import Optional, Sequence
 
 from dataclasses import dataclass
 
-from line_profiler import profile
+# from line_profiler import profile
 
 # This file frequently references Minecraft's inverted textures.
 # Those are referencing the fact that Minecraft has north as z-
@@ -99,7 +99,7 @@ class Renderer:
             self.rotate_element_center(faces, "x", x)
             self.rotate_element_center(faces, "y", y)
             self.rotate_element_center(faces, "z", z)
-        self.rasterize(model.elements, element_faces, uv_locked_faces, color)
+        self.raytrace(model.elements, element_faces, uv_locked_faces, color)
 
     def build_faces(self, element: ModelElement) -> npt.NDArray[np.float32]:
         """
@@ -173,7 +173,7 @@ class Renderer:
             (it's assumed that the angle is 45 degrees).
         """
         angle_rad = np.deg2rad(angle)
-        indicies = [0, 1, 2]
+        indicies = [0, 2, 1]
         indicies.remove("xyz".index(axis))
         a1, a2 = indicies
         o1, o2 = origin[a1], origin[a2]
@@ -212,6 +212,16 @@ class Renderer:
         if rotation is not None:
             # Blind unpacking from dict from JSON
             # hopefully won't break anytime soon
+            # Apparently Minecraft has 2 different rotation methods
+            # First one is used in blockstates, and rotates relative
+            # to the 2 axes that are not the axis of rotation, meaning
+            # y rotations are clockwise.
+            # Second one rotates counterclockwise while looking in the
+            # negative direction of the axis.
+            # Too confusing to implement 2 methods, so I'll just invert
+            # x and y rotations to change one to the other.
+            if rotation["axis"] != "z":
+                rotation["angle"] *= -1
             self.rotate_faces(faces, **rotation)
 
     def rotate_element_center(
@@ -233,8 +243,8 @@ class Renderer:
             CENTER = [8, 8, 8]
             self.rotate_faces(faces, CENTER, axis, angle)
 
-    @profile
-    def rasterize(
+    # @profile
+    def raytrace(
         self,
         elements: list[ModelElement],
         element_faces: list[npt.NDArray[np.float32]],
@@ -286,7 +296,7 @@ class Renderer:
         #     the model location as if the texture was projected onto the block.
         #   e. Fetch some other properties
         #   f. Get texture; if new, add to cache
-        #   g. Get slopes and intercepts
+        #   g. Get slopes and intercepts (to raytrace)
         #     The renderer relies on math with slopes and intercetps to function,
         #     which might not be a very good algorithm, but works fine for now,
         #     although suggestions are definitely welcome.

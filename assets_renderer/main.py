@@ -256,7 +256,7 @@ def render_time_takers():
 
     # Note block: takes ~100s
     j.parse_state(
-        ["note_block.json"], ["note", "instrument", "powered"], "note_block.png"
+        ["note_block.json"], ["powered", "note", "instrument"], "note_block.png", key=lambda d: d["note"] == "0" and d["instrument"] == "harp"
     )
 
 
