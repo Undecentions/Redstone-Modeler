@@ -145,7 +145,7 @@ document.getElementById("logo").load();
 await Images.load_images(Images.imageURLs);
 console.log("Images loaded:", new Date().getTime() - start);
 
-const splash = new Promise(resolve => setTimeout(resolve, 2000));
+const splash = new Promise(resolve => setTimeout(resolve, 1000));
 const load_main = new Promise((resolve) => {
     main();
     resolve();
